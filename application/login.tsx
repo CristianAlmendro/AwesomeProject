@@ -29,11 +29,6 @@ function Login(): JSX.Element {
         <PrimaryButton onPress={handlePress}>
           <Text style={style.submitText}>Login</Text>
         </PrimaryButton>
-        {/* <TouchableHighlight
-          onPress={() => Alert.alert('Simple Button pressed')}
-          style={style.button}>
-          <Text style={style.submitText}>Login</Text>
-        </TouchableHighlight> */}
       </SafeAreaView>
     </View>
   );
