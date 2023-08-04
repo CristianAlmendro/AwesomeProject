@@ -1,15 +1,31 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Image, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import Colors from './resources/colors';
-import PrimaryButton from './resources/components/primaryButton';
-import CustomTextInput from './resources/components/customTextField';
-function Login(): JSX.Element {
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
+import PrimaryButton from './resources/components/PrimaryButton';
+import CustomTextInput from './resources/components/CustomTextField';
 
-  const handlePress = () => {
-    // Handle the touch event here
-    console.log('Button pressed!');
+import apiService from './services/apiService';
+
+function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [logged, setLogged] = useState(false);
+
+  useEffect(() => {
+    const handlePress = async () => {
+      // Handle the touch event here
+      console.log(email);
+      console.log(password);
+      const users = await apiService.getUserLogin(email, password);
+      console.log(users);
+      setLogged(true);
+    };
+
+    handlePress();
+  }, [email, password]);
+
+  const handlePress2 = () => {
+    navigation.navigate('PokemonList');
   };
 
   return (
@@ -36,9 +52,10 @@ function Login(): JSX.Element {
             onChangeText={setPassword}
           />
         </View>
-        <PrimaryButton onPress={handlePress}>
+        <PrimaryButton onPress={handlePress2}>
           <Text style={style.submitText}>Login</Text>
         </PrimaryButton>
+        <Text style={style.label}> {logged ? 'Password' : 'Password 1'} </Text>
       </SafeAreaView>
     </View>
   );
