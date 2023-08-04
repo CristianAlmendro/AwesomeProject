@@ -11,7 +11,6 @@ const Colors = {
 
   primaryButtonBackground: '#EA5D60',
   primaryButtonText: '#FFFFFF',
-  secondary: '#00BFFF',
 };
 
 export default Colors;

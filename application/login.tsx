@@ -1,20 +1,11 @@
 import React from 'react';
-import {
-  Alert,
-  Button,
-  Image,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableHighlight,
-  View,
-} from 'react-native';
+import {Image, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import Colors from './resources/colors';
 import PrimaryButton from './resources/components/primaryButton';
+import CustomTextInput from './resources/components/customTextField';
 function Login(): JSX.Element {
-  const [email, onChangeEmail] = React.useState('');
-  const [password, onChangePassword] = React.useState('');
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
 
   const handlePress = () => {
     // Handle the touch event here
@@ -26,22 +17,24 @@ function Login(): JSX.Element {
       <SafeAreaView style={style.container}>
         <Image
           style={style.logo}
-          source={require('./resources/images/pokedex_logo.png')}></Image>
+          source={require('./resources/images/pokedex_logo.png')}
+        />
 
         <View style={style.form}>
           <Text style={style.label}> Email </Text>
-          <TextInput
-            style={style.input}
-            onChangeText={onChangeEmail}
-            placeholder="Email"></TextInput>
+          <CustomTextInput
+            placeholder="Email"
+            imageSource={require('./resources/icons/user-fill.png')}
+            value={email}
+            onChangeText={setEmail}
+          />
           <Text style={style.label}> Password </Text>
-
-          <TextInput
-            style={style.input}
-            onChangeText={onChangePassword}
+          <CustomTextInput
             placeholder="Password"
-            numberOfLines={1}
-            maxLength={50}></TextInput>
+            imageSource={require('./resources/icons/lock-2-fill.png')}
+            value={password}
+            onChangeText={setPassword}
+          />
         </View>
         <PrimaryButton onPress={handlePress}>
           <Text style={style.submitText}>Login</Text>
@@ -73,6 +66,7 @@ const style = StyleSheet.create({
     fontWeight: 'normal',
     fontSize: 16,
     color: Colors.textGray,
+    paddingTop: 20,
   },
   submitText: {
     color: Colors.white,
@@ -86,7 +80,9 @@ const style = StyleSheet.create({
     backgroundColor: Colors.backgroundInput,
   },
   form: {
+    display: 'flex',
     width: '80%',
+    alignContent: 'space-between',
   },
 });
 export default Login;
