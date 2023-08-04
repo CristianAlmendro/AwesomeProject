@@ -9,7 +9,7 @@ const Stack = createNativeStackNavigator();
 function MainApp() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="PokemonList" component={PokemonList} />
       </Stack.Navigator>

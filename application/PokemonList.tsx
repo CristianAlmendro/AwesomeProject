@@ -1,8 +1,16 @@
 import React from 'react';
-import {Text} from 'react-native-svg';
+import {Button} from 'react-native';
 
-function PokemonList(): JSX.Element {
-  return <Text>Pokemon List</Text>;
+function PokemonList({navigation}): JSX.Element {
+  return (
+    <Button
+      title="Test"
+      onPress={() => {
+        navigation.popToTop();
+      }}>
+      Pokemon List
+    </Button>
+  );
 }
 
 export default PokemonList;

@@ -6,7 +6,7 @@ import CustomTextInput from './resources/components/CustomTextField';
 
 import apiService from './services/apiService';
 
-function Login() {
+function Login({navigation}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [logged, setLogged] = useState(false);
@@ -55,7 +55,6 @@ function Login() {
         <PrimaryButton onPress={handlePress2}>
           <Text style={style.submitText}>Login</Text>
         </PrimaryButton>
-        <Text style={style.label}> {logged ? 'Password' : 'Password 1'} </Text>
       </SafeAreaView>
     </View>
   );
