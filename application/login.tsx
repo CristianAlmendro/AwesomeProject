@@ -14,6 +14,7 @@ import Colors from './resources/colors';
 import PrimaryButton from './resources/components/primaryButton';
 function Login(): JSX.Element {
   const [email, onChangeEmail] = React.useState('');
+  const [password, onChangePassword] = React.useState('');
 
   const handlePress = () => {
     // Handle the touch event here
@@ -23,9 +24,25 @@ function Login(): JSX.Element {
   return (
     <View style={style.appContainer}>
       <SafeAreaView style={style.container}>
-        <Image source={require('./resources/images/pokedex_logo.png')}></Image>
-        <Text style={style.title}> LOGIN </Text>
-        <TextInput style={style.input} onChangeText={onChangeEmail}></TextInput>
+        <Image
+          style={style.logo}
+          source={require('./resources/images/pokedex_logo.png')}></Image>
+
+        <View style={style.form}>
+          <Text style={style.label}> Email </Text>
+          <TextInput
+            style={style.input}
+            onChangeText={onChangeEmail}
+            placeholder="Email"></TextInput>
+          <Text style={style.label}> Password </Text>
+
+          <TextInput
+            style={style.input}
+            onChangeText={onChangePassword}
+            placeholder="Password"
+            numberOfLines={1}
+            maxLength={50}></TextInput>
+        </View>
         <PrimaryButton onPress={handlePress}>
           <Text style={style.submitText}>Login</Text>
         </PrimaryButton>
@@ -43,16 +60,22 @@ const style = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: Colors.background,
-    marginTop: 100,
+    marginTop: 60,
     marginBottom: 80,
     height: '100%',
   },
-  title: {
-    fontWeight: 'bold',
-    fontSize: 40,
+  logo: {
+    width: '80%',
+    height: 100,
+    marginBottom: 50,
+  },
+  label: {
+    fontWeight: 'normal',
+    fontSize: 16,
+    color: Colors.textGray,
   },
   submitText: {
-    color: Colors.text,
+    color: Colors.white,
     textAlign: 'center',
   },
   input: {
@@ -60,8 +83,10 @@ const style = StyleSheet.create({
     margin: 12,
     padding: 10,
     borderRadius: 10,
-    width: '80%',
     backgroundColor: Colors.backgroundInput,
+  },
+  form: {
+    width: '80%',
   },
 });
 export default Login;

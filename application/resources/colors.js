@@ -3,7 +3,9 @@ const Colors = {
   secondary: '#00BFFF',
   background: '#F5F5F5',
   backgroundInput: '#F2F2F2',
+
   text: '#333333',
+  textGray: '#747476',
   white: '#FFFFFF',
   black: '#000000',
 
