@@ -1,3 +1,5 @@
+![Simulator Screenshot - iPhone 14 Pro - 2023-08-03 at 15 07 32](https://github.com/CristianAlmendro/AwesomeProject/assets/91498505/eded0203-63a0-4f06-a195-d7e0c8b1a327)
+
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
 # Getting Started
