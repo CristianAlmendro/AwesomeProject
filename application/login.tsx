@@ -6,7 +6,7 @@ import CustomTextInput from './resources/components/CustomTextField';
 
 import apiService from './services/apiService';
 
-function Login({navigation}) {
+function Login({navigation}: {navigation: any}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [logged, setLogged] = useState(false);
