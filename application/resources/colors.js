@@ -25,6 +25,7 @@ const Colors = {
   typeWater: '#4A90DA',
   typeBug: '#8CB230',
   typeNormal: '#9DA0AA',
+  typePoison: '#A552CC',
 };
 
 export default Colors;

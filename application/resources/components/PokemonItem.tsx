@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList, Image, StyleSheet, Text, View} from 'react-native';
+import {FlatList, StyleSheet, Text, View} from 'react-native';
 import Colors from '../colors';
 import PokemonBadge from './PokemonBadge';
 import {getDynamicStyles} from '../dynamicStyles';
@@ -7,13 +7,20 @@ import {getDynamicStyles} from '../dynamicStyles';
 function PokemonItem({pokemon}) {
   const dynamicStyles = getDynamicStyles(pokemon.types[0].pokemon_v2_type.name);
 
+  const intToHexColor = (number: any) => {
+    const paddedNumber = String(number).padStart(3, '0');
+    return `#${paddedNumber}`;
+  };
+
   return (
     <View style={style.container}>
       <View style={style.emptyTop} />
       <View style={dynamicStyles.background}>
         <View style={style.cardArea}>
-          <Text style={style.pokemonId}>{pokemon.id}</Text>
-          <Text style={style.pokemonName}>{pokemon.name}</Text>
+          <Text style={style.pokemonId}> {intToHexColor(pokemon.id)}</Text>
+          <Text style={style.pokemonName}>
+            {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
+          </Text>
           <FlatList
             style={style.pokemonBadge}
             data={pokemon.types}

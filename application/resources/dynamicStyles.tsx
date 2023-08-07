@@ -15,6 +15,7 @@ const typeColorMappings = {
   water: Colors.typeWater,
   bug: Colors.typeBug,
   normal: Colors.typeNormal,
+  poison: Colors.typePoison,
   // ... TODO: Add missing colors
 };
 
