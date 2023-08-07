@@ -95,7 +95,7 @@ function PokemonList({navigation}: {navigation: any}): JSX.Element {
           <FlatList
             style={style.list}
             data={items}
-            renderItem={({item}) => <PokemonItem item={item} />}
+            renderItem={({item}) => <PokemonItem pokemon={item} />}
             keyExtractor={(item, index) => index.toString()}
             ItemSeparatorComponent={Separator}
           />

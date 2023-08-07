@@ -1,19 +1,21 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {FlatList, Image, StyleSheet, Text, View} from 'react-native';
 import Colors from '../colors';
 import PokemonBadge from './PokemonBadge';
 
-function PokemonItem({item}) {
+function PokemonItem({pokemon}) {
   return (
     <View style={style.container}>
       <View style={style.emptyTop} />
       <View style={style.cardArea}>
-        <Text style={style.pokemonId}>{item.id}</Text>
-        <Text style={style.pokemonName}>{item.name}</Text>
-        <View style={style.pokemonBadge}>
-          <PokemonBadge />
-          <PokemonBadge />
-        </View>
+        <Text style={style.pokemonId}>{pokemon.id}</Text>
+        <Text style={style.pokemonName}>{pokemon.name}</Text>
+        <FlatList
+          style={style.pokemonBadge}
+          data={pokemon.types}
+          renderItem={({item}) => <PokemonBadge item={item.pokemon_v2_type} />}
+          keyExtractor={item => item.pokemon_v2_type.id.toString()}
+        />
       </View>
     </View>
   );

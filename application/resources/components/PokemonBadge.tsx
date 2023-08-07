@@ -2,11 +2,11 @@ import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import Colors from '../colors';
 
-function PokemonBadge() {
+function PokemonBadge({item}) {
   return (
     <View style={style.container}>
       <Image style={style.bargeImage} source={require('../icons/Filter.png')} />
-      <Text style={style.bargeText}> test</Text>
+      <Text style={style.bargeText}> {item.name}</Text>
     </View>
   );
 }
