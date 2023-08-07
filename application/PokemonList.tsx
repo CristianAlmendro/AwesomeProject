@@ -7,6 +7,7 @@ import {
   Image,
   TouchableOpacity,
   StyleSheet,
+  ScrollView,
 } from 'react-native';
 import PokemonItem from './resources/components/PokemonItem';
 import Colors from './resources/colors';
@@ -14,7 +15,7 @@ import CustomTextInput from './resources/components/CustomTextField';
 
 function PokemonList({navigation}: {navigation: any}): JSX.Element {
   const data = [
-    {id: 1, name: 'Item 1', description: 'Description for Item 1'},
+    {id: 1, name: '#001', description: 'Description for Item 1'},
     {id: 2, name: 'Item 2', description: 'Description for Item 2'},
     {id: 3, name: 'Item 3', description: 'Description for Item 3'},
     {id: 4, name: 'Item 4', description: 'Description for Item 4'},
@@ -25,6 +26,8 @@ function PokemonList({navigation}: {navigation: any}): JSX.Element {
   const logoutAction = () => {
     navigation.popToTop();
   };
+
+  const Separator = () => <View style={style.separator} />;
 
   return (
     <SafeAreaView>
@@ -49,7 +52,7 @@ function PokemonList({navigation}: {navigation: any}): JSX.Element {
             Search for Pokémon by name or using the National Pokédex number.
           </Text>
           <CustomTextInput
-            placeholder="Password"
+            placeholder="What Pokémon are you looking for?"
             imageSource={require('./resources/icons/Search.png')}
             value={search}
             onChangeText={setSearch}
@@ -59,6 +62,7 @@ function PokemonList({navigation}: {navigation: any}): JSX.Element {
             data={data}
             renderItem={({item}) => <PokemonItem item={item} />}
             keyExtractor={(item, index) => index.toString()}
+            ItemSeparatorComponent={Separator}
           />
         </View>
       </View>
@@ -68,7 +72,7 @@ function PokemonList({navigation}: {navigation: any}): JSX.Element {
 
 const style = StyleSheet.create({
   container: {
-    paddingHorizontal: 40,
+    paddingHorizontal: 20,
     backgroundColor: Colors.background,
     height: '100%',
   },
@@ -100,6 +104,10 @@ const style = StyleSheet.create({
   },
   list: {
     marginTop: 20,
+  },
+  separator: {
+    height: 5,
+    backgroundColor: Colors.background,
   },
 });
 
