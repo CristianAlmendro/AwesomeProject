@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, TextInput, StyleSheet, Image} from 'react-native';
+import Colors from '../colors.js';
 
 const CustomTextInput = ({placeholder, imageSource, value, onChangeText}) => {
   return (
@@ -8,7 +9,7 @@ const CustomTextInput = ({placeholder, imageSource, value, onChangeText}) => {
       <TextInput
         style={styles.input}
         placeholder={placeholder}
-        placeholderTextColor="#888"
+        placeholderTextColor={Colors.textGray}
         value={value}
         onChangeText={onChangeText}
       />
@@ -23,9 +24,8 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     paddingHorizontal: 16,
     borderRadius: 8,
-    borderWidth: 1,
-    borderColor: '#ccc',
     height: 60,
+    backgroundColor: Colors.backgroundInput,
   },
   iconContainer: {
     marginRight: 8,
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     fontSize: 16,
-    color: '#000',
+    color: Colors.textBlack,
   },
 });
 
