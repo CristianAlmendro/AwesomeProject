@@ -8,8 +8,8 @@ function PokemonItem({item}) {
     <View style={style.container}>
       <View style={style.emptyTop} />
       <View style={style.cardArea}>
-        <Text style={style.pokemonId}>{item.name}</Text>
-        <Text style={style.pokemonName}>{item.description}</Text>
+        <Text style={style.pokemonId}>{item.id}</Text>
+        <Text style={style.pokemonName}>{item.name}</Text>
         <View style={style.pokemonBadge}>
           <PokemonBadge />
           <PokemonBadge />

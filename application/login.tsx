@@ -11,19 +11,6 @@ function Login({navigation}: {navigation: any}) {
   const [password, setPassword] = useState('');
   const [logged, setLogged] = useState(false);
 
-  useEffect(() => {
-    const handlePress = async () => {
-      // Handle the touch event here
-      console.log(email);
-      console.log(password);
-      const users = await apiService.getUserLogin(email, password);
-      console.log(users);
-      setLogged(true);
-    };
-
-    handlePress();
-  }, [email, password]);
-
   const handlePress2 = () => {
     navigation.navigate('PokemonList');
   };

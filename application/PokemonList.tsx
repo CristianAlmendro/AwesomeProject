@@ -7,21 +7,56 @@ import {
   Image,
   TouchableOpacity,
   StyleSheet,
-  ScrollView,
 } from 'react-native';
 import PokemonItem from './resources/components/PokemonItem';
 import Colors from './resources/colors';
 import CustomTextInput from './resources/components/CustomTextField';
+import {useQuery, gql} from '@apollo/client';
+
+const GET_ITEMS = gql`
+  query getAllPokemonsWithLimit($limit: Int) {
+    pokemons: pokemon_v2_pokemon(limit: 20) {
+      id
+      name
+      height
+      weight
+      types: pokemon_v2_pokemontypes {
+        pokemon_v2_type {
+          id
+          name
+        }
+      }
+      generationData: pokemon_v2_pokemonspecy {
+        generation: pokemon_v2_generation {
+          id
+          name
+        }
+      }
+    }
+  }
+`;
 
 function PokemonList({navigation}: {navigation: any}): JSX.Element {
-  const data = [
-    {id: 1, name: '#001', description: 'Description for Item 1'},
-    {id: 2, name: 'Item 2', description: 'Description for Item 2'},
-    {id: 3, name: 'Item 3', description: 'Description for Item 3'},
-    {id: 4, name: 'Item 4', description: 'Description for Item 4'},
-  ];
-
+  const {loading, error, data} = useQuery(GET_ITEMS);
   const [search, setSearch] = useState('');
+
+  if (loading) {
+    return (
+      <SafeAreaView>
+        <Text>Loading...</Text>
+      </SafeAreaView>
+    );
+  }
+
+  if (error) {
+    return (
+      <SafeAreaView>
+        <Text>Error: {error.message}</Text>
+      </SafeAreaView>
+    );
+  }
+
+  const items = data.pokemons;
 
   const logoutAction = () => {
     navigation.popToTop();
@@ -59,7 +94,7 @@ function PokemonList({navigation}: {navigation: any}): JSX.Element {
           />
           <FlatList
             style={style.list}
-            data={data}
+            data={items}
             renderItem={({item}) => <PokemonItem item={item} />}
             keyExtractor={(item, index) => index.toString()}
             ItemSeparatorComponent={Separator}
