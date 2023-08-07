@@ -15,7 +15,16 @@ const Colors = {
   primaryButtonText: '#FFFFFF',
 
   backgroundTypeGrass: '#8BBE8A',
-  backgroundTypeBug: '#62B957',
+  backgroundTypeFire: '#FFA756',
+  backgroundTypeWater: '#58ABF6',
+  backgroundTypeBug: '#8BD674',
+  backgroundTypeNormal: '#B5B9C4',
+
+  typeGrass: '#62B957',
+  typeFire: '#FD7D24',
+  typeWater: '#4A90DA',
+  typeBug: '#8CB230',
+  typeNormal: '#9DA0AA',
 };
 
 export default Colors;
