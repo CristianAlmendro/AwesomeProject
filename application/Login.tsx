@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {Alert, Image, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import Colors from './resources/colors';
 import PrimaryButton from './resources/components/PrimaryButton';
