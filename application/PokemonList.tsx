@@ -12,6 +12,10 @@ import PokemonItem from './resources/components/PokemonItem';
 import Colors from './resources/colors';
 import CustomTextInput from './resources/components/CustomTextField';
 import {useQuery, gql} from '@apollo/client';
+import FilterIcon from './resources/icons/FilterIcon';
+import GenerationIcon from './resources/icons/GenerationIcon';
+import SortIcon from './resources/icons/SortIcon';
+import LogoutIcon from './resources/icons/LogoutIcon';
 
 const GET_ITEMS = gql`
   query getAllPokemonsWithLimit($limit: Int) {
@@ -69,16 +73,16 @@ function PokemonList({navigation}: {navigation: any}): JSX.Element {
       <View style={style.container}>
         <View style={style.icons}>
           <TouchableOpacity style={style.icon}>
-            <Image source={require('./resources/icons/Generation.png')} />
+            <GenerationIcon />
           </TouchableOpacity>
           <TouchableOpacity style={style.icon}>
-            <Image source={require('./resources/icons/Sort.png')} />
+            <SortIcon />
           </TouchableOpacity>
           <TouchableOpacity style={style.icon}>
-            <Image source={require('./resources/icons/Filter.png')} />
+            <FilterIcon />
           </TouchableOpacity>
           <TouchableOpacity style={style.icon} onPress={logoutAction}>
-            <Image source={require('./resources/icons/logout-box-fill.png')} />
+            <LogoutIcon />
           </TouchableOpacity>
         </View>
         <View>
@@ -116,6 +120,7 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     alignContent: 'space-between',
     justifyContent: 'flex-end',
+    color: Colors.black,
   },
   icon: {
     height: 25,
