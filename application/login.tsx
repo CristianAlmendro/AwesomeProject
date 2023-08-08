@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Image, SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {Alert, Image, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import Colors from './resources/colors';
 import PrimaryButton from './resources/components/PrimaryButton';
 import CustomTextInput from './resources/components/CustomTextField';
@@ -9,10 +9,17 @@ import apiService from './services/apiService';
 function Login({navigation}: {navigation: any}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [logged, setLogged] = useState(false);
 
-  const handlePress2 = () => {
-    navigation.navigate('PokemonList');
+  const handleLogginAction = async () => {
+    try {
+      const data = await apiService.getAllUsers();
+      if (data) {
+        navigation.navigate('PokemonList');
+      }
+    } catch (error) {
+      console.error('Error calling API:', error);
+      Alert.alert('Error', 'An error occurred while calling the API.');
+    }
   };
 
   return (
@@ -39,7 +46,7 @@ function Login({navigation}: {navigation: any}) {
             onChangeText={setPassword}
           />
         </View>
-        <PrimaryButton onPress={handlePress2}>
+        <PrimaryButton onPress={handleLogginAction}>
           <Text style={style.submitText}>Login</Text>
         </PrimaryButton>
       </SafeAreaView>

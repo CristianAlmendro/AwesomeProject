@@ -1,9 +1,9 @@
 import React from 'react';
-import Login from './Login';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import PokemonList from './PokemonList';
 import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
+import Login from './Login';
+import PokemonList from './PokemonList';
 
 const Stack = createNativeStackNavigator();
 
