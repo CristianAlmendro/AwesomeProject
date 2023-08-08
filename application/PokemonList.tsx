@@ -73,16 +73,16 @@ function PokemonList({navigation}: {navigation: any}): JSX.Element {
       <View style={style.container}>
         <View style={style.icons}>
           <TouchableOpacity style={style.icon}>
-            <GenerationIcon />
+            <GenerationIcon color={Colors.black} />
           </TouchableOpacity>
           <TouchableOpacity style={style.icon}>
-            <SortIcon />
+            <SortIcon color={Colors.black} />
           </TouchableOpacity>
           <TouchableOpacity style={style.icon}>
-            <FilterIcon />
+            <FilterIcon color={Colors.black} />
           </TouchableOpacity>
           <TouchableOpacity style={style.icon} onPress={logoutAction}>
-            <LogoutIcon />
+            <LogoutIcon color={Colors.black} />
           </TouchableOpacity>
         </View>
         <View>
@@ -120,13 +120,13 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     alignContent: 'space-between',
     justifyContent: 'flex-end',
-    color: Colors.black,
   },
   icon: {
     height: 25,
     width: 25,
     marginLeft: 10,
     marginTop: 40,
+    color: Colors.black,
   },
   title: {
     fontSize: 32,
