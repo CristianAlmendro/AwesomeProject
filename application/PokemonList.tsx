@@ -4,41 +4,18 @@ import {
   SafeAreaView,
   Text,
   View,
-  Image,
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
 import PokemonItem from './resources/components/PokemonItem';
 import Colors from './resources/colors';
 import CustomTextInput from './resources/components/CustomTextField';
-import {useQuery, gql} from '@apollo/client';
+import {useQuery} from '@apollo/client';
 import FilterIcon from './resources/icons/FilterIcon';
 import GenerationIcon from './resources/icons/GenerationIcon';
 import SortIcon from './resources/icons/SortIcon';
 import LogoutIcon from './resources/icons/LogoutIcon';
-
-const GET_ITEMS = gql`
-  query getAllPokemonsWithLimit($limit: Int) {
-    pokemons: pokemon_v2_pokemon(limit: 20) {
-      id
-      name
-      height
-      weight
-      types: pokemon_v2_pokemontypes {
-        pokemon_v2_type {
-          id
-          name
-        }
-      }
-      generationData: pokemon_v2_pokemonspecy {
-        generation: pokemon_v2_generation {
-          id
-          name
-        }
-      }
-    }
-  }
-`;
+import GET_ITEMS from './services/GraphQLQuery';
 
 function PokemonList({navigation}: {navigation: any}): JSX.Element {
   const {loading, error, data} = useQuery(GET_ITEMS);

@@ -3,7 +3,6 @@ import {Alert, Image, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import Colors from './resources/colors';
 import PrimaryButton from './resources/components/PrimaryButton';
 import CustomTextInput from './resources/components/CustomTextField';
-
 import apiService from './services/apiService';
 
 function Login({navigation}: {navigation: any}) {
