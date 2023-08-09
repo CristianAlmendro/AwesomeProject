@@ -15,10 +15,11 @@ import FilterIcon from './resources/icons/FilterIcon';
 import GenerationIcon from './resources/icons/GenerationIcon';
 import SortIcon from './resources/icons/SortIcon';
 import LogoutIcon from './resources/icons/LogoutIcon';
-import GET_ITEMS from './services/GraphQLQuery';
+import GET_POKEMONS from './services/GraphQLQuery';
+import {Pokemon, PokemonData} from './models/Pokemon';
 
 function PokemonList({navigation}: {navigation: any}): JSX.Element {
-  const {loading, error, data} = useQuery(GET_ITEMS);
+  const {loading, error, data} = useQuery(GET_POKEMONS);
   const [search, setSearch] = useState('');
 
   if (loading) {
@@ -37,7 +38,9 @@ function PokemonList({navigation}: {navigation: any}): JSX.Element {
     );
   }
 
-  const items = data.pokemons;
+  const items = data.pokemons.map(
+    (pokemonData: PokemonData) => new Pokemon(pokemonData),
+  );
 
   const logoutAction = () => {
     navigation.popToTop();

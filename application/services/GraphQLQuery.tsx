@@ -1,6 +1,6 @@
 import {gql} from '@apollo/client';
 
-const GET_ITEMS = gql`
+const GET_POKEMONS = gql`
   query getAllPokemonsWithLimit($limit: Int) {
     pokemons: pokemon_v2_pokemon(limit: 20) {
       id
@@ -23,4 +23,4 @@ const GET_ITEMS = gql`
   }
 `;
 
-export default GET_ITEMS;
+export default GET_POKEMONS;

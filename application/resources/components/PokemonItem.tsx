@@ -3,12 +3,17 @@ import {FlatList, Image, StyleSheet, Text, View} from 'react-native';
 import Colors from '../colors';
 import PokemonBadge from './PokemonBadge';
 import {getDynamicStyles} from '../dynamicStyles';
+import {Pokemon} from '../../models/Pokemon';
 
-function PokemonItem({pokemon}) {
-  const dynamicStyles = getDynamicStyles(pokemon.types[0].pokemon_v2_type.name);
+interface PokemonItemProps {
+  pokemon: Pokemon;
+}
 
-  const intToHexColor = (number: any) => {
-    const paddedNumber = String(number).padStart(3, '0');
+function PokemonItem({pokemon}: PokemonItemProps) {
+  const dynamicStyles = getDynamicStyles(pokemon.types[0].name);
+
+  const intToHexColor = (id: number) => {
+    const paddedNumber = String(id).padStart(3, '0');
     return `#${paddedNumber}`;
   };
 
@@ -29,10 +34,8 @@ function PokemonItem({pokemon}) {
             <FlatList
               style={style.pokemonBadge}
               data={pokemon.types}
-              renderItem={({item}) => (
-                <PokemonBadge item={item.pokemon_v2_type} />
-              )}
-              keyExtractor={item => item.pokemon_v2_type.id.toString()}
+              renderItem={({item}) => <PokemonBadge item={item} />}
+              keyExtractor={item => item.id.toString()}
             />
           </View>
           <View style={style.imageArea}>
