@@ -2,16 +2,15 @@ import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import Colors from '../colors';
 import {getDynamicStyles} from '../dynamicStyles';
+import PokemonTypeSelector from './PokemonTypeSelector';
 
 function PokemonBadge({item}) {
   const dynamicStyles = getDynamicStyles(item.name);
+  const pokemonType = PokemonTypeSelector(item.name, 15, 15, Colors.white);
   return (
     <View style={dynamicStyles.type}>
       <View style={style.container}>
-        <Image
-          style={style.bargeImage}
-          source={require('../icons/Filter.png')}
-        />
+        {pokemonType}
         <Text style={style.bargeText}> {item.name}</Text>
       </View>
     </View>

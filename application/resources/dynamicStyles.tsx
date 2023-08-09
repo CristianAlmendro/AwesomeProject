@@ -1,25 +1,53 @@
 import {StyleSheet} from 'react-native';
 import Colors from './colors';
-const backgroundColorMappings = {
-  grass: Colors.backgroundTypeGrass,
-  fire: Colors.backgroundTypeFire,
-  water: Colors.backgroundTypeWater,
+
+interface TypeMapping {
+  [key: string]: string;
+}
+
+const backgroundColorMappings: TypeMapping = {
   bug: Colors.backgroundTypeBug,
+  dark: Colors.backgroundTypeDark,
+  dragon: Colors.backgroundTypeDragon,
+  electric: Colors.backgroundTypeElectric,
+  fairy: Colors.backgroundTypeFairy,
+  fighting: Colors.backgroundTypeFighting,
+  fire: Colors.backgroundTypeFire,
+  flying: Colors.backgroundTypeFlying,
+  ghost: Colors.backgroundTypeGhost,
+  grass: Colors.backgroundTypeGrass,
+  ground: Colors.backgroundTypeGround,
+  ice: Colors.backgroundTypeIce,
   normal: Colors.backgroundTypeNormal,
-  // ... TODO: Add missing colors
+  poison: Colors.backgroundTypePoison,
+  psychic: Colors.backgroundTypePsychic,
+  rock: Colors.backgroundTypeRock,
+  steel: Colors.backgroundTypeSteel,
+  water: Colors.backgroundTypeWater,
 };
 
-const typeColorMappings = {
-  grass: Colors.typeGrass,
-  fire: Colors.typeFire,
-  water: Colors.typeWater,
+const typeColorMappings: TypeMapping = {
   bug: Colors.typeBug,
+  dark: Colors.typeDark,
+  dragon: Colors.typeDragon,
+  electric: Colors.typeElectric,
+  fairy: Colors.typeFairy,
+  fighting: Colors.typeFighting,
+  fire: Colors.typeFire,
+  flying: Colors.typeFlying,
+  ghost: Colors.typeGhost,
+  grass: Colors.typeGrass,
+  ground: Colors.typeGround,
+  ice: Colors.typeIce,
   normal: Colors.typeNormal,
   poison: Colors.typePoison,
-  // ... TODO: Add missing colors
+  psychic: Colors.typePsychic,
+  rock: Colors.typeRock,
+  steel: Colors.typeSteel,
+  water: Colors.typeWater,
 };
 
-export const getDynamicStyles = textColor => {
+export const getDynamicStyles = (textColor: string) => {
   const backgroundColor =
     backgroundColorMappings[textColor] || Colors.primaryButtonBackground;
 
