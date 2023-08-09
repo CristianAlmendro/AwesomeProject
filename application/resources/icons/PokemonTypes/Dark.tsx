@@ -1,13 +1,9 @@
 import * as React from 'react';
 import Svg, {G, Path, Defs, ClipPath} from 'react-native-svg';
-const Dark = ({color, width, height, ...props}) => (
-  <Svg
-    xmlns="http://www.w3.org/2000/svg"
-    width={width}
-    height={height}
-    viewBox="0 0 25 25"
-    fill="none"
-    {...props}>
+import {IconProps} from '../../Types';
+
+const Dark = ({color, width, height, ...props}: IconProps) => (
+  <Svg width={width} height={height} viewBox="0 0 25 25" fill="none" {...props}>
     <G clipPath="url(#a)">
       <Path
         fill={color}
