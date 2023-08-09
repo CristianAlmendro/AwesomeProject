@@ -3,10 +3,10 @@ import {StyleSheet, Text, View} from 'react-native';
 import Colors from '../colors';
 import {getDynamicStyles} from '../dynamicStyles';
 import PokemonTypeSelector from './PokemonTypeSelector';
-import {Pokemon_v2_type} from '../../models/Pokemon';
+import {PokemonType} from '../../models/Pokemon';
 
 interface PokemonBadgeProps {
-  item: Pokemon_v2_type;
+  item: PokemonType;
 }
 
 function PokemonBadge({item}: PokemonBadgeProps) {
