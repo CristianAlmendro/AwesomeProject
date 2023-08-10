@@ -12,6 +12,7 @@ import PokemonBadge from './PokemonBadge';
 import {getDynamicStyles} from '../dynamicStyles';
 import {Pokemon} from '../../models/Pokemon';
 import {useNavigation} from '@react-navigation/native';
+import {getPokemonArtWork, intToHexColor} from '../Utilities';
 
 interface PokemonItemProps {
   pokemon: Pokemon;
@@ -20,14 +21,6 @@ interface PokemonItemProps {
 function PokemonItem({pokemon}: PokemonItemProps) {
   const dynamicStyles = getDynamicStyles(pokemon.types[0].name);
   const navigation = useNavigation(); // Initialize the navigation hook
-  const intToHexColor = (id: number) => {
-    const paddedNumber = String(id).padStart(3, '0');
-    return `#${paddedNumber}`;
-  };
-
-  const getImage = (id: any) => {
-    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
-  };
 
   return (
     <TouchableOpacity
@@ -47,14 +40,14 @@ function PokemonItem({pokemon}: PokemonItemProps) {
                 style={style.pokemonBadge}
                 data={pokemon.types}
                 renderItem={({item}) => <PokemonBadge item={item} />}
-                keyExtractor={item => item.id.toString()}
+                keyExtractor={item => String(item.id)}
               />
             </View>
             <View style={style.imageArea}>
               <Image
                 style={style.pokemonImage}
                 source={{
-                  uri: getImage(pokemon.id),
+                  uri: getPokemonArtWork(pokemon.id),
                 }}
               />
             </View>

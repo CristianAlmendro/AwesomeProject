@@ -4,6 +4,10 @@ export interface IconProps {
   height?: number;
 }
 
+export interface NavigationProp {
+  navigation: any;
+}
+
 export interface PokemonModelInterface {
   base_happiness: number;
   capture_rate: number;

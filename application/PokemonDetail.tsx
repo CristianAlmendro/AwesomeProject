@@ -6,9 +6,9 @@ import Colors from './resources/colors';
 import {useRoute} from '@react-navigation/native';
 import {GET_POKEMON_DETAIL} from './services/GraphQLQuery';
 import {useQuery} from '@apollo/client';
-import {PokemonModel} from './models/PokemonModel';
+import {NavigationProp} from './resources/Types';
 
-const PokemonDetail = ({navigation}: {navigation: any}) => {
+const PokemonDetail = ({navigation}: NavigationProp) => {
   const route = useRoute();
   const {pokemonId} = route.params;
 
@@ -16,7 +16,6 @@ const PokemonDetail = ({navigation}: {navigation: any}) => {
     variables: {_eq: pokemonId},
   });
   console.log(data);
-  // const pokemonDetail = new PokemonModel(data.data);
 
   const goBackToList = () => {
     navigation.popToTop();
@@ -41,8 +40,8 @@ const PokemonDetail = ({navigation}: {navigation: any}) => {
   return (
     <SafeAreaView style={style.container}>
       <View>
-        <TouchableOpacity onPress={goBackToList}>
-          <BackIcon style={style.backButton} />
+        <TouchableOpacity style={style.backButton} onPress={goBackToList}>
+          <BackIcon color={Colors.white} />
         </TouchableOpacity>
         <Text>{pokemonId} </Text>
       </View>
