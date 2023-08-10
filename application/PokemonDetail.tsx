@@ -15,7 +15,8 @@ const PokemonDetail = ({navigation}: {navigation: any}) => {
   const {loading, error, data} = useQuery(GET_POKEMON_DETAIL, {
     variables: {_eq: pokemonId},
   });
-  // const pokemonDetail = new PokemonModel(data.pokemon_v2_pokemonspecies[0]);
+  console.log(data);
+  // const pokemonDetail = new PokemonModel(data.data);
 
   const goBackToList = () => {
     navigation.popToTop();

@@ -25,13 +25,15 @@ function PokemonItem({pokemon}: PokemonItemProps) {
     return `#${paddedNumber}`;
   };
 
-  const getImage = (number: any) => {
-    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${number}.png`;
+  const getImage = (id: any) => {
+    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
   };
 
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate('PokemonDetail', {pokemonId: 2})}>
+      onPress={() =>
+        navigation.navigate('PokemonDetail', {pokemonId: pokemon.id})
+      }>
       <View style={style.container}>
         <View style={style.emptyTop} />
         <View style={dynamicStyles.background}>
