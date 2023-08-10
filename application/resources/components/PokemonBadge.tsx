@@ -16,7 +16,10 @@ function PokemonBadge({item}: PokemonBadgeProps) {
     <View style={dynamicStyles.type}>
       <View style={style.container}>
         {pokemonType}
-        <Text style={style.bargeText}> {item.name}</Text>
+        <Text style={style.bargeText}>
+          {' '}
+          {item.name.charAt(0).toUpperCase() + item.name.slice(1)}
+        </Text>
       </View>
     </View>
   );
