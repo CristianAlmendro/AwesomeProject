@@ -66,25 +66,23 @@ function PokemonList({navigation}: NavigationProp): JSX.Element {
             <LogoutIcon color={Colors.black} />
           </TouchableOpacity>
         </View>
-        <View>
-          <Text style={style.title}>Pokédex</Text>
-          <Text style={style.subtitle}>
-            Search for Pokémon by name or using the National Pokédex number.
-          </Text>
-          <CustomTextInput
-            placeholder="What Pokémon are you looking for?"
-            imageSource={require('./resources/icons/Search.png')}
-            value={search}
-            onChangeText={setSearch}
-          />
-          <FlatList
-            style={style.list}
-            data={items}
-            renderItem={({item}) => <PokemonItem pokemon={item} />}
-            keyExtractor={(item, index) => index.toString()}
-            ItemSeparatorComponent={Separator}
-          />
-        </View>
+        <Text style={style.title}>Pokédex</Text>
+        <Text style={style.subtitle}>
+          Search for Pokémon by name or using the National Pokédex number.
+        </Text>
+        <CustomTextInput
+          placeholder="What Pokémon are you looking for?"
+          imageSource={require('./resources/icons/Search.png')}
+          value={search}
+          onChangeText={setSearch}
+        />
+        <FlatList
+          style={style.list}
+          data={items}
+          renderItem={({item}) => <PokemonItem pokemon={item} />}
+          keyExtractor={(item, index) => index.toString()}
+          ItemSeparatorComponent={Separator}
+        />
       </View>
     </SafeAreaView>
   );
