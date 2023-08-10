@@ -15,7 +15,7 @@ import FilterIcon from './resources/icons/FilterIcon';
 import GenerationIcon from './resources/icons/GenerationIcon';
 import SortIcon from './resources/icons/SortIcon';
 import LogoutIcon from './resources/icons/LogoutIcon';
-import GET_POKEMONS from './services/GraphQLQuery';
+import {GET_POKEMONS} from './services/GraphQLQuery';
 import {Pokemon, PokemonData} from './models/Pokemon';
 
 function PokemonList({navigation}: {navigation: any}): JSX.Element {

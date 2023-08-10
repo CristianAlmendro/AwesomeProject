@@ -1,9 +1,17 @@
 import React from 'react';
-import {FlatList, Image, StyleSheet, Text, View} from 'react-native';
+import {
+  FlatList,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import Colors from '../colors';
 import PokemonBadge from './PokemonBadge';
 import {getDynamicStyles} from '../dynamicStyles';
 import {Pokemon} from '../../models/Pokemon';
+import {useNavigation} from '@react-navigation/native';
 
 interface PokemonItemProps {
   pokemon: Pokemon;
@@ -11,7 +19,7 @@ interface PokemonItemProps {
 
 function PokemonItem({pokemon}: PokemonItemProps) {
   const dynamicStyles = getDynamicStyles(pokemon.types[0].name);
-
+  const navigation = useNavigation(); // Initialize the navigation hook
   const intToHexColor = (id: number) => {
     const paddedNumber = String(id).padStart(3, '0');
     return `#${paddedNumber}`;
@@ -22,33 +30,36 @@ function PokemonItem({pokemon}: PokemonItemProps) {
   };
 
   return (
-    <View style={style.container}>
-      <View style={style.emptyTop} />
-      <View style={dynamicStyles.background}>
-        <View style={style.pokemonContent}>
-          <View style={style.cardArea}>
-            <Text style={style.pokemonId}> {intToHexColor(pokemon.id)}</Text>
-            <Text style={style.pokemonName}>
-              {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
-            </Text>
-            <FlatList
-              style={style.pokemonBadge}
-              data={pokemon.types}
-              renderItem={({item}) => <PokemonBadge item={item} />}
-              keyExtractor={item => item.id.toString()}
-            />
-          </View>
-          <View style={style.imageArea}>
-            <Image
-              style={style.pokemonImage}
-              source={{
-                uri: getImage(pokemon.id),
-              }}
-            />
+    <TouchableOpacity
+      onPress={() => navigation.navigate('PokemonDetail', {pokemonId: 2})}>
+      <View style={style.container}>
+        <View style={style.emptyTop} />
+        <View style={dynamicStyles.background}>
+          <View style={style.pokemonContent}>
+            <View style={style.cardArea}>
+              <Text style={style.pokemonId}> {intToHexColor(pokemon.id)}</Text>
+              <Text style={style.pokemonName}>
+                {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
+              </Text>
+              <FlatList
+                style={style.pokemonBadge}
+                data={pokemon.types}
+                renderItem={({item}) => <PokemonBadge item={item} />}
+                keyExtractor={item => item.id.toString()}
+              />
+            </View>
+            <View style={style.imageArea}>
+              <Image
+                style={style.pokemonImage}
+                source={{
+                  uri: getImage(pokemon.id),
+                }}
+              />
+            </View>
           </View>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 
