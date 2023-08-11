@@ -20,7 +20,7 @@ interface PokemonItemProps {
 
 function PokemonItem({pokemon}: PokemonItemProps) {
   const dynamicStyles = getDynamicStyles(pokemon.types[0].name);
-  const navigation = useNavigation(); // Initialize the navigation hook
+  const navigation = useNavigation();
 
   return (
     <TouchableOpacity

@@ -16,7 +16,6 @@ import GenerationIcon from './resources/icons/GenerationIcon';
 import SortIcon from './resources/icons/SortIcon';
 import {GET_POKEMONS} from './services/GraphQLQuery';
 import {Pokemon, PokemonData} from './models/Pokemon';
-import {NavigationProp} from './resources/Types';
 
 function PokemonList(): JSX.Element {
   const {loading, error, data} = useQuery(GET_POKEMONS);

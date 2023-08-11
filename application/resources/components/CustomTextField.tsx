@@ -4,7 +4,6 @@ import Colors from '../colors.js';
 
 interface CustomTextInputProps {
   placeholder: string;
-  imageSource: ImageSourcePropType;
   value: string;
   onChangeText: (text: string) => void;
 }
