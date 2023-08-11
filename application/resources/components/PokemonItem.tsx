@@ -14,6 +14,7 @@ import {Pokemon} from '../../models/Pokemon';
 import {useNavigation} from '@react-navigation/native';
 import {getPokemonArtWork, intToHexColor} from '../Utilities';
 import Pattern from '../icons/Pattern';
+import Pokeball from '../icons/Pokeball';
 
 interface PokemonItemProps {
   pokemon: Pokemon;
@@ -58,6 +59,9 @@ function PokemonItem({pokemon}: PokemonItemProps) {
           }}
         />
       </View>
+      <View style={style.pokeballContainer}>
+        <Pokeball />
+      </View>
     </TouchableOpacity>
   );
 }
@@ -91,7 +95,7 @@ const style = StyleSheet.create({
     flexDirection: 'row',
   },
   pokemonImageContainer: {
-    display: 'flex',
+    zIndex: 2,
     width: '100%',
     position: 'absolute',
     flexDirection: 'row',
@@ -110,6 +114,14 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     marginTop: 30,
     marginLeft: 90,
+  },
+  pokeballContainer: {
+    zIndex: 1,
+    position: 'absolute',
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    marginTop: 25,
   },
 });
 
