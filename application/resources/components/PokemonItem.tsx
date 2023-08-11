@@ -13,6 +13,7 @@ import {getDynamicStyles} from '../dynamicStyles';
 import {Pokemon} from '../../models/Pokemon';
 import {useNavigation} from '@react-navigation/native';
 import {getPokemonArtWork, intToHexColor} from '../Utilities';
+import Pattern from '../icons/Pattern';
 
 interface PokemonItemProps {
   pokemon: Pokemon;
@@ -46,6 +47,9 @@ function PokemonItem({pokemon}: PokemonItemProps) {
           </View>
         </View>
       </View>
+      <View style={style.patternContainer}>
+        <Pattern width={74} height={32} />
+      </View>
       <View style={style.pokemonImageContainer}>
         <Image
           style={style.pokemonImage}
@@ -75,19 +79,16 @@ const style = StyleSheet.create({
     fontWeight: '700',
     fontStyle: 'normal',
     color: Colors.textNumber,
-    backgroundColor: 'red',
   },
   pokemonName: {
     fontSize: 26,
     fontWeight: '700',
     fontStyle: 'normal',
     color: Colors.white,
-    backgroundColor: 'yellow',
   },
   pokemonBadge: {
     marginTop: 5,
     flexDirection: 'row',
-    backgroundColor: 'green',
   },
   pokemonImageContainer: {
     display: 'flex',
@@ -103,6 +104,12 @@ const style = StyleSheet.create({
   },
   pokemonContent: {
     flexDirection: 'row',
+  },
+  patternContainer: {
+    position: 'absolute',
+    flexDirection: 'row',
+    marginTop: 30,
+    marginLeft: 90,
   },
 });
 
