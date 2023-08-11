@@ -43,16 +43,16 @@ function PokemonItem({pokemon}: PokemonItemProps) {
                 keyExtractor={item => String(item.id)}
               />
             </View>
-            <View style={style.imageArea}>
-              <Image
-                style={style.pokemonImage}
-                source={{
-                  uri: getPokemonArtWork(pokemon.id),
-                }}
-              />
-            </View>
           </View>
         </View>
+      </View>
+      <View style={style.pokemonImageContainer}>
+        <Image
+          style={style.pokemonImage}
+          source={{
+            uri: getPokemonArtWork(pokemon.id),
+          }}
+        />
       </View>
     </TouchableOpacity>
   );
@@ -61,39 +61,45 @@ function PokemonItem({pokemon}: PokemonItemProps) {
 const style = StyleSheet.create({
   container: {
     display: 'flex',
-    flex: 1,
   },
   emptyTop: {
     height: 25,
   },
   cardArea: {
-    width: '60%',
     height: 115,
     padding: 20,
     flexDirection: 'column',
-  },
-  imageArea: {
-    width: '40%',
-    paddingRight: 10,
   },
   pokemonId: {
     fontSize: 12,
     fontWeight: '700',
     fontStyle: 'normal',
     color: Colors.textNumber,
+    backgroundColor: 'red',
   },
   pokemonName: {
     fontSize: 26,
     fontWeight: '700',
     fontStyle: 'normal',
     color: Colors.white,
+    backgroundColor: 'yellow',
   },
   pokemonBadge: {
+    marginTop: 5,
     flexDirection: 'row',
+    backgroundColor: 'green',
+  },
+  pokemonImageContainer: {
+    display: 'flex',
+    width: '100%',
+    position: 'absolute',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
   },
   pokemonImage: {
     width: 130,
     height: 130,
+    marginRight: 10,
   },
   pokemonContent: {
     flexDirection: 'row',

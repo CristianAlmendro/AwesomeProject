@@ -14,12 +14,11 @@ import {useQuery} from '@apollo/client';
 import FilterIcon from './resources/icons/FilterIcon';
 import GenerationIcon from './resources/icons/GenerationIcon';
 import SortIcon from './resources/icons/SortIcon';
-import LogoutIcon from './resources/icons/LogoutIcon';
 import {GET_POKEMONS} from './services/GraphQLQuery';
 import {Pokemon, PokemonData} from './models/Pokemon';
 import {NavigationProp} from './resources/Types';
 
-function PokemonList({navigation}: NavigationProp): JSX.Element {
+function PokemonList(): JSX.Element {
   const {loading, error, data} = useQuery(GET_POKEMONS);
   const [search, setSearch] = useState('');
 
@@ -43,10 +42,6 @@ function PokemonList({navigation}: NavigationProp): JSX.Element {
     (pokemonData: PokemonData) => new Pokemon(pokemonData),
   );
 
-  const logoutAction = () => {
-    navigation.popToTop();
-  };
-
   const Separator = () => <View style={style.separator} />;
 
   return (
@@ -54,16 +49,13 @@ function PokemonList({navigation}: NavigationProp): JSX.Element {
       <View style={style.container}>
         <View style={style.icons}>
           <TouchableOpacity style={style.icon}>
-            <GenerationIcon color={Colors.black} />
+            <GenerationIcon color={Colors.black} width={25} height={25} />
           </TouchableOpacity>
           <TouchableOpacity style={style.icon}>
-            <SortIcon color={Colors.black} />
+            <SortIcon color={Colors.black} width={25} height={25} />
           </TouchableOpacity>
           <TouchableOpacity style={style.icon}>
-            <FilterIcon color={Colors.black} />
-          </TouchableOpacity>
-          <TouchableOpacity style={style.icon} onPress={logoutAction}>
-            <LogoutIcon color={Colors.black} />
+            <FilterIcon color={Colors.black} width={25} height={25} />
           </TouchableOpacity>
         </View>
         <Text style={style.title}>Pokédex</Text>
@@ -72,7 +64,6 @@ function PokemonList({navigation}: NavigationProp): JSX.Element {
         </Text>
         <CustomTextInput
           placeholder="What Pokémon are you looking for?"
-          imageSource={require('./resources/icons/Search.png')}
           value={search}
           onChangeText={setSearch}
         />

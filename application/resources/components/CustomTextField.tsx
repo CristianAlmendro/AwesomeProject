@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  View,
-  TextInput,
-  StyleSheet,
-  Image,
-  ImageSourcePropType,
-} from 'react-native';
+import {View, TextInput, StyleSheet, ImageSourcePropType} from 'react-native';
 import Colors from '../colors.js';
 
 interface CustomTextInputProps {
@@ -17,13 +11,11 @@ interface CustomTextInputProps {
 
 const CustomTextInput = ({
   placeholder,
-  imageSource,
   value,
   onChangeText,
 }: CustomTextInputProps) => {
   return (
     <View style={styles.container}>
-      <Image style={styles.iconContainer} source={imageSource} />
       <TextInput
         style={styles.input}
         placeholder={placeholder}

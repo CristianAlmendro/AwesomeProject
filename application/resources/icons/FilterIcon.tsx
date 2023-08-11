@@ -1,7 +1,9 @@
 import * as React from 'react';
 import Svg, {Path} from 'react-native-svg';
-const FilterIcon = ({color, ...props}) => (
-  <Svg width={25} height={25} fill="none" {...props}>
+import {IconProps} from '../Types';
+
+const FilterIcon = ({color, width, height, ...props}: IconProps) => (
+  <Svg width={width} height={height} fill="none" {...props}>
     <Path
       fill={color}
       fillRule="evenodd"
