@@ -33,7 +33,7 @@ function PokemonItem({pokemon}: PokemonItemProps) {
         <View style={style.emptyTop} />
         <View style={dynamicStyles.background}>
           <View style={style.pokemonContent}>
-            <View style={style.cardArea}>
+            <View style={style.pokemonInfoContainer}>
               <Text style={style.pokemonId}> {intToHexColor(pokemon.id)}</Text>
               <Text style={style.pokemonName}>
                 {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
@@ -45,22 +45,22 @@ function PokemonItem({pokemon}: PokemonItemProps) {
                 keyExtractor={item => String(item.id)}
               />
             </View>
+            <View style={style.pokemonImageContainer}>
+              <Image
+                style={style.pokemonImage}
+                source={{
+                  uri: getPokemonArtWork(pokemon.id),
+                }}
+              />
+            </View>
+            <View style={style.pokeballContainer}>
+              <Pokeball />
+            </View>
           </View>
         </View>
       </View>
       <View style={style.patternContainer}>
         <Pattern width={74} height={32} />
-      </View>
-      <View style={style.pokemonImageContainer}>
-        <Image
-          style={style.pokemonImage}
-          source={{
-            uri: getPokemonArtWork(pokemon.id),
-          }}
-        />
-      </View>
-      <View style={style.pokeballContainer}>
-        <Pokeball />
       </View>
     </TouchableOpacity>
   );
@@ -73,55 +73,49 @@ const style = StyleSheet.create({
   emptyTop: {
     height: 25,
   },
-  cardArea: {
-    height: 115,
-    padding: 20,
-    flexDirection: 'column',
+  pokemonInfoContainer: {
+    marginLeft: 20,
+    marginTop: 20,
   },
   pokemonId: {
     fontSize: 12,
-    fontWeight: '700',
     fontStyle: 'normal',
-    color: Colors.textNumber,
+    fontWeight: '700',
+    color: Colors.textPokemonId,
   },
   pokemonName: {
     fontSize: 26,
-    fontWeight: '700',
     fontStyle: 'normal',
+    fontWeight: '700',
     color: Colors.white,
   },
   pokemonBadge: {
-    marginTop: 5,
     flexDirection: 'row',
-  },
-  pokemonImageContainer: {
-    zIndex: 2,
-    width: '100%',
-    position: 'absolute',
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
   },
   pokemonImage: {
     width: 130,
     height: 130,
-    marginRight: 10,
   },
   pokemonContent: {
+    flex: 1,
     flexDirection: 'row',
+    justifyContent: 'space-between',
+    height: 115,
   },
   patternContainer: {
     position: 'absolute',
-    flexDirection: 'row',
-    marginTop: 30,
-    marginLeft: 90,
+    left: 90,
+    top: 30,
+  },
+  pokemonImageContainer: {
+    zIndex: 2,
+    right: 10,
+    top: -25,
   },
   pokeballContainer: {
     zIndex: 1,
     position: 'absolute',
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    marginTop: 25,
+    right: 0,
   },
 });
 
