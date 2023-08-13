@@ -44,7 +44,7 @@ function PokemonList(): JSX.Element {
   const Separator = () => <View style={style.separator} />;
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={style.safeAreaContainer}>
       <View style={style.container}>
         <View style={style.icons}>
           <TouchableOpacity style={style.icon}>
@@ -72,6 +72,7 @@ function PokemonList(): JSX.Element {
           renderItem={({item}) => <PokemonItem pokemon={item} />}
           keyExtractor={(item, index) => index.toString()}
           ItemSeparatorComponent={Separator}
+          showsVerticalScrollIndicator={false}
         />
       </View>
     </SafeAreaView>
@@ -79,12 +80,15 @@ function PokemonList(): JSX.Element {
 }
 
 const style = StyleSheet.create({
-  container: {
-    paddingHorizontal: 20,
+  safeAreaContainer: {
+    flex: 1,
     backgroundColor: Colors.background,
   },
+  container: {
+    flex: 1,
+    paddingHorizontal: 20,
+  },
   icons: {
-    display: 'flex',
     flexDirection: 'row',
     alignContent: 'space-between',
     justifyContent: 'flex-end',
@@ -111,6 +115,7 @@ const style = StyleSheet.create({
     paddingBottom: 25,
   },
   list: {
+    flex: 1,
     marginTop: 20,
   },
   separator: {
