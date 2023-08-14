@@ -16,9 +16,16 @@ import GenerationIcon from './resources/icons/GenerationIcon';
 import SortIcon from './resources/icons/SortIcon';
 import {GET_POKEMONS} from './services/GraphQLQuery';
 import {Pokemon, PokemonData} from './models/Pokemon';
+import PokeballIcon from './resources/icons/PokeballIcon';
+
+var pokemons = [];
 
 function PokemonList(): JSX.Element {
-  const {loading, error, data} = useQuery(GET_POKEMONS);
+  const [limit] = useState(20);
+  const [offset, setOffset] = useState(0);
+  const {loading, error, data, fetchMore} = useQuery(GET_POKEMONS, {
+    variables: {limit: limit, offset: offset},
+  });
   const [search, setSearch] = useState('');
 
   if (loading) {
@@ -37,14 +44,32 @@ function PokemonList(): JSX.Element {
     );
   }
 
-  const items = data.pokemons.map(
+  pokemons = data.pokemons.map(
     (pokemonData: PokemonData) => new Pokemon(pokemonData),
   );
 
   const Separator = () => <View style={style.separator} />;
 
+  const handleLoadMore = () => {
+    fetchMore({
+      variables: {limit, offset: data.pokemons.length},
+      updateQuery: (prevResult, {fetchMoreResult}) => {
+        console.log('prevResult', prevResult);
+        console.log('fetchMoreResult', fetchMoreResult);
+        if (!fetchMoreResult) return prevResult;
+        return {
+          pokemons: [...prevResult.pokemons, ...fetchMoreResult.pokemons],
+        };
+      },
+    });
+    setOffset(offset + limit);
+  };
+
   return (
     <SafeAreaView style={style.safeAreaContainer}>
+      <View style={style.pokeballContainer}>
+        <PokeballIcon />
+      </View>
       <View style={style.container}>
         <View style={style.icons}>
           <TouchableOpacity style={style.icon}>
@@ -68,11 +93,13 @@ function PokemonList(): JSX.Element {
         />
         <FlatList
           style={style.list}
-          data={items}
+          data={pokemons}
           renderItem={({item}) => <PokemonItem pokemon={item} />}
           keyExtractor={(item, index) => index.toString()}
           ItemSeparatorComponent={Separator}
           showsVerticalScrollIndicator={false}
+          onEndReached={handleLoadMore} // Load more data when reaching the end
+          onEndReachedThreshold={0.1} // Trigger when 10% from the end
         />
       </View>
     </SafeAreaView>
@@ -83,6 +110,10 @@ const style = StyleSheet.create({
   safeAreaContainer: {
     flex: 1,
     backgroundColor: Colors.background,
+  },
+  pokeballContainer: {
+    position: 'absolute',
+    width: '100%',
   },
   container: {
     flex: 1,

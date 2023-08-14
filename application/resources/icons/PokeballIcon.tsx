@@ -1,12 +1,9 @@
 import * as React from 'react';
 import Svg, {Path, Defs, LinearGradient, Stop} from 'react-native-svg';
-const PokeballIcon = props => (
-  <Svg
-    xmlns="http://www.w3.org/2000/svg"
-    width={414}
-    height={207}
-    fill="none"
-    {...props}>
+import {IconProps} from '../Types';
+
+const PokeballIcon = ({...props}: IconProps) => (
+  <Svg width={350} height={207} fill="none" {...props}>
     <Path
       fill="url(#a)"
       d="M207-207c106.525 0 194.396 79.273 207 181.626H312.97c-11.504-47.501-54.584-82.8-105.97-82.8-51.386 0-94.466 35.299-105.97 82.8H0C12.604-127.727 100.475-207 207-207Z"
