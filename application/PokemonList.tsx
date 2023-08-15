@@ -33,13 +33,13 @@ function PokemonList(): JSX.Element {
     );
   }
 
-  const Separator = () => <View style={style.separator} />;
-
   const handleLoadMore = () => {
     fetchMore({
       variables: {limit, offset: data.pokemons.length},
       updateQuery: (prevResult, {fetchMoreResult}) => {
-        if (!fetchMoreResult) return prevResult;
+        if (!fetchMoreResult) {
+          return prevResult;
+        }
         setPokemonList(list =>
           list.concat(
             fetchMoreResult.pokemons.map(
@@ -58,6 +58,10 @@ function PokemonList(): JSX.Element {
         pokemon.name.toLowerCase().includes(search.toLowerCase()),
       ),
     );
+  };
+
+  const separator = () => {
+    return <View style={style.separator} />;
   };
 
   return (
@@ -100,7 +104,7 @@ function PokemonList(): JSX.Element {
             data={search.length === 0 ? pokemonList : filteredPokemons}
             renderItem={({item}) => <PokemonItem pokemon={item} />}
             keyExtractor={(item, index) => index.toString()}
-            ItemSeparatorComponent={Separator}
+            ItemSeparatorComponent={separator}
             showsVerticalScrollIndicator={false}
             onEndReached={handleLoadMore}
             onEndReachedThreshold={0.1}

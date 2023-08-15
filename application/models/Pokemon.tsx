@@ -3,9 +3,6 @@ export interface PokemonType {
   name: string;
   pokemon_v2_type: PokemonType;
 }
-export interface Pokemon_v2_type {
-  pokemon_v2_type: PokemonType;
-}
 
 export interface GenerationData {
   id: number;
