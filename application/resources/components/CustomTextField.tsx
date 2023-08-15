@@ -21,6 +21,8 @@ const CustomTextInput = ({
         placeholderTextColor={Colors.textGray}
         value={value}
         onChangeText={onChangeText}
+        autoCapitalize="none"
+        autoCorrect={false}
       />
     </View>
   );

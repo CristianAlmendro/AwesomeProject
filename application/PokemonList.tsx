@@ -20,12 +20,12 @@ import PokeballIcon from './resources/icons/PokeballIcon';
 
 function PokemonList(): JSX.Element {
   const [limit] = useState(20);
-  const [offset, setOffset] = useState(0);
   const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
-  const {loading, error, data, fetchMore} = useQuery(GET_POKEMONS, {
-    variables: {limit: limit, offset: offset},
-  });
+  const [filteredPokemons, setFilteredPokemons] = useState<Pokemon[]>([]);
   const [search, setSearch] = useState('');
+  const {loading, error, data, fetchMore} = useQuery(GET_POKEMONS, {
+    variables: {limit: limit, offset: 0},
+  });
 
   if (data && pokemonList.length === 0) {
     setPokemonList(
@@ -49,7 +49,15 @@ function PokemonList(): JSX.Element {
         );
       },
     });
-    setOffset(offset + limit);
+  };
+
+  const handleSearch = (searchText: string) => {
+    setSearch(searchText);
+    setFilteredPokemons(
+      pokemonList.filter(pokemon =>
+        pokemon.name.toLowerCase().includes(search.toLowerCase()),
+      ),
+    );
   };
 
   return (
@@ -76,7 +84,7 @@ function PokemonList(): JSX.Element {
         <CustomTextInput
           placeholder="What Pokémon are you looking for?"
           value={search}
-          onChangeText={setSearch}
+          onChangeText={handleSearch}
         />
         {loading && pokemonList.length === 0 ? (
           <SafeAreaView>
@@ -89,13 +97,13 @@ function PokemonList(): JSX.Element {
         ) : (
           <FlatList
             style={style.list}
-            data={pokemonList}
+            data={search.length === 0 ? pokemonList : filteredPokemons}
             renderItem={({item}) => <PokemonItem pokemon={item} />}
             keyExtractor={(item, index) => index.toString()}
             ItemSeparatorComponent={Separator}
             showsVerticalScrollIndicator={false}
-            onEndReached={handleLoadMore} // Load more data when reaching the end
-            onEndReachedThreshold={0.1} // Trigger when 10% from the end
+            onEndReached={handleLoadMore}
+            onEndReachedThreshold={0.1}
           />
         )}
       </View>
@@ -110,7 +118,6 @@ const style = StyleSheet.create({
   },
   pokeballContainer: {
     position: 'absolute',
-    width: '100%',
   },
   container: {
     flex: 1,
