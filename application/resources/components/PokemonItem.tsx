@@ -12,7 +12,11 @@ import PokemonBadge from './PokemonBadge';
 import {getDynamicStyles} from '../dynamicStyles';
 import {Pokemon} from '../../models/Pokemon';
 import {useNavigation} from '@react-navigation/native';
-import {getPokemonArtWork, intToHexColor} from '../Utilities';
+import {
+  getPokemonArtWork,
+  intToHexColor,
+  uppercaseFirstLetter,
+} from '../Utilities';
 import Pattern from '../icons/Pattern';
 import Pokeball from '../icons/Pokeball';
 
@@ -23,6 +27,8 @@ interface PokemonItemProps {
 function PokemonItem({pokemon}: PokemonItemProps) {
   const dynamicStyles = getDynamicStyles(pokemon.types[0].name);
   const navigation = useNavigation();
+
+  const pokemonName = uppercaseFirstLetter(pokemon.name);
 
   return (
     <TouchableOpacity
@@ -35,9 +41,7 @@ function PokemonItem({pokemon}: PokemonItemProps) {
           <View style={style.pokemonContent}>
             <View style={style.pokemonInfoContainer}>
               <Text style={style.pokemonId}> {intToHexColor(pokemon.id)}</Text>
-              <Text style={style.pokemonName}>
-                {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
-              </Text>
+              <Text style={style.pokemonName}>{pokemonName}</Text>
               <FlatList
                 style={style.pokemonBadge}
                 data={pokemon.types}
@@ -90,6 +94,7 @@ const style = StyleSheet.create({
     color: Colors.white,
   },
   pokemonBadge: {
+    marginTop: 5,
     flexDirection: 'row',
   },
   pokemonImage: {

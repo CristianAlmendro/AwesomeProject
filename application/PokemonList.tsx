@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   FlatList,
   SafeAreaView,
@@ -18,8 +18,9 @@ import {GET_POKEMONS} from './services/GraphQLQuery';
 import {Pokemon, PokemonData} from './models/Pokemon';
 import PokeballIcon from './resources/icons/PokeballIcon';
 
+const limit = 20;
+
 function PokemonList(): JSX.Element {
-  const [limit] = useState(20);
   const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
   const [filteredPokemons, setFilteredPokemons] = useState<Pokemon[]>([]);
   const [search, setSearch] = useState('');
@@ -27,11 +28,15 @@ function PokemonList(): JSX.Element {
     variables: {limit: limit, offset: 0},
   });
 
-  if (data && pokemonList.length === 0) {
-    setPokemonList(
-      data.pokemons.map((pokemonData: PokemonData) => new Pokemon(pokemonData)),
-    );
-  }
+  useEffect(() => {
+    if (data && pokemonList.length === 0) {
+      setPokemonList(
+        data.pokemons.map(
+          (pokemonData: PokemonData) => new Pokemon(pokemonData),
+        ),
+      );
+    }
+  }, [data, pokemonList]);
 
   const handleLoadMore = () => {
     fetchMore({

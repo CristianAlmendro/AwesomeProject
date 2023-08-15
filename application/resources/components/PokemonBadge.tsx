@@ -4,6 +4,7 @@ import Colors from '../colors';
 import {getDynamicStyles} from '../dynamicStyles';
 import PokemonTypeSelector from './PokemonTypeSelector';
 import {PokemonType} from '../../models/Pokemon';
+import {uppercaseFirstLetter} from '../Utilities';
 
 interface PokemonBadgeProps {
   item: PokemonType;
@@ -12,13 +13,13 @@ interface PokemonBadgeProps {
 function PokemonBadge({item}: PokemonBadgeProps) {
   const dynamicStyles = getDynamicStyles(item.name);
   const pokemonType = PokemonTypeSelector(item.name, 15, 15, Colors.white);
+  const typeName = uppercaseFirstLetter(item.name);
+
   return (
     <View style={dynamicStyles.type}>
       <View style={style.container}>
         {pokemonType}
-        <Text style={style.bargeText}>
-          {item.name.charAt(0).toUpperCase() + item.name.slice(1)}
-        </Text>
+        <Text style={style.bargeText}>{typeName}</Text>
       </View>
     </View>
   );

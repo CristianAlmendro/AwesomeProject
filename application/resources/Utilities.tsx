@@ -6,3 +6,7 @@ export const intToHexColor = (id: number) => {
 export const getPokemonArtWork = (id: number) => {
   return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
 };
+
+export function uppercaseFirstLetter(word: string) {
+  return word.charAt(0).toUpperCase() + word.slice(1);
+}
