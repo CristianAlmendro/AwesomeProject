@@ -18,35 +18,20 @@ import {GET_POKEMONS} from './services/GraphQLQuery';
 import {Pokemon, PokemonData} from './models/Pokemon';
 import PokeballIcon from './resources/icons/PokeballIcon';
 
-var pokemons = [];
-
 function PokemonList(): JSX.Element {
   const [limit] = useState(20);
   const [offset, setOffset] = useState(0);
+  const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
   const {loading, error, data, fetchMore} = useQuery(GET_POKEMONS, {
     variables: {limit: limit, offset: offset},
   });
   const [search, setSearch] = useState('');
 
-  if (loading) {
-    return (
-      <SafeAreaView>
-        <Text>Loading...</Text>
-      </SafeAreaView>
+  if (data && pokemonList.length === 0) {
+    setPokemonList(
+      data.pokemons.map((pokemonData: PokemonData) => new Pokemon(pokemonData)),
     );
   }
-
-  if (error) {
-    return (
-      <SafeAreaView>
-        <Text>Error: {error.message}</Text>
-      </SafeAreaView>
-    );
-  }
-
-  pokemons = data.pokemons.map(
-    (pokemonData: PokemonData) => new Pokemon(pokemonData),
-  );
 
   const Separator = () => <View style={style.separator} />;
 
@@ -54,12 +39,14 @@ function PokemonList(): JSX.Element {
     fetchMore({
       variables: {limit, offset: data.pokemons.length},
       updateQuery: (prevResult, {fetchMoreResult}) => {
-        console.log('prevResult', prevResult);
-        console.log('fetchMoreResult', fetchMoreResult);
         if (!fetchMoreResult) return prevResult;
-        return {
-          pokemons: [...prevResult.pokemons, ...fetchMoreResult.pokemons],
-        };
+        setPokemonList(list =>
+          list.concat(
+            fetchMoreResult.pokemons.map(
+              (pokemonData: PokemonData) => new Pokemon(pokemonData),
+            ),
+          ),
+        );
       },
     });
     setOffset(offset + limit);
@@ -91,16 +78,26 @@ function PokemonList(): JSX.Element {
           value={search}
           onChangeText={setSearch}
         />
-        <FlatList
-          style={style.list}
-          data={pokemons}
-          renderItem={({item}) => <PokemonItem pokemon={item} />}
-          keyExtractor={(item, index) => index.toString()}
-          ItemSeparatorComponent={Separator}
-          showsVerticalScrollIndicator={false}
-          onEndReached={handleLoadMore} // Load more data when reaching the end
-          onEndReachedThreshold={0.1} // Trigger when 10% from the end
-        />
+        {loading && pokemonList.length === 0 ? (
+          <SafeAreaView>
+            <Text>Loading...</Text>
+          </SafeAreaView>
+        ) : error ? (
+          <SafeAreaView>
+            <Text>Error: {error.message}</Text>
+          </SafeAreaView>
+        ) : (
+          <FlatList
+            style={style.list}
+            data={pokemonList}
+            renderItem={({item}) => <PokemonItem pokemon={item} />}
+            keyExtractor={(item, index) => index.toString()}
+            ItemSeparatorComponent={Separator}
+            showsVerticalScrollIndicator={false}
+            onEndReached={handleLoadMore} // Load more data when reaching the end
+            onEndReachedThreshold={0.1} // Trigger when 10% from the end
+          />
+        )}
       </View>
     </SafeAreaView>
   );
