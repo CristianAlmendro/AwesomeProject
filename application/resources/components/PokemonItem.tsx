@@ -10,7 +10,7 @@ import {
 import Colors from '../colors';
 import PokemonBadge from './PokemonBadge';
 import {getDynamicStyles} from '../dynamicStyles';
-import {Pokemon} from '../../models/Pokemon';
+import {PokemonData} from '../../models/Pokemon';
 import {useNavigation} from '@react-navigation/native';
 import {
   getPokemonArtWork,
@@ -21,13 +21,12 @@ import Pattern from '../icons/Pattern';
 import Pokeball from '../icons/Pokeball';
 
 interface PokemonItemProps {
-  pokemon: Pokemon;
+  pokemon: PokemonData;
 }
 
 function PokemonItem({pokemon}: PokemonItemProps) {
-  const dynamicStyles = getDynamicStyles(pokemon.types[0].name);
   const navigation = useNavigation();
-
+  const dynamicStyles = getDynamicStyles(pokemon.pokemonTypes[0].type.name);
   const pokemonName = uppercaseFirstLetter(pokemon.name);
 
   return (
@@ -44,9 +43,9 @@ function PokemonItem({pokemon}: PokemonItemProps) {
               <Text style={style.pokemonName}>{pokemonName}</Text>
               <FlatList
                 style={style.pokemonBadge}
-                data={pokemon.types}
-                renderItem={({item}) => <PokemonBadge item={item} />}
-                keyExtractor={item => String(item.id)}
+                data={pokemon.pokemonTypes}
+                renderItem={({item}) => <PokemonBadge item={item.type.name} />}
+                keyExtractor={item => String(item.type.id)}
               />
             </View>
             <View style={style.pokemonImageContainer}>

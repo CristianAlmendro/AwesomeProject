@@ -15,26 +15,26 @@ import FilterIcon from './resources/icons/FilterIcon';
 import GenerationIcon from './resources/icons/GenerationIcon';
 import SortIcon from './resources/icons/SortIcon';
 import {GET_POKEMONS} from './services/GraphQLQuery';
-import {Pokemon, PokemonData} from './models/Pokemon';
+import {PokemonData} from './models/Pokemon';
 import PokeballIcon from './resources/icons/PokeballIcon';
 
-const limit = 20;
+const limit = 10;
 
 function PokemonList(): JSX.Element {
-  const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
-  const [filteredPokemons, setFilteredPokemons] = useState<Pokemon[]>([]);
+  const [pokemonList, setPokemonList] = useState<PokemonData[]>([]);
+  const [filteredPokemons, setFilteredPokemons] = useState<PokemonData[]>([]);
   const [search, setSearch] = useState('');
   const {loading, error, data, fetchMore} = useQuery(GET_POKEMONS, {
     variables: {limit: limit, offset: 0},
   });
 
+  if (data) {
+    console.log(data.pokemons);
+  }
+
   useEffect(() => {
     if (data && pokemonList.length === 0) {
-      setPokemonList(
-        data.pokemons.map(
-          (pokemonData: PokemonData) => new Pokemon(pokemonData),
-        ),
-      );
+      setPokemonList(data.pokemons);
     }
   }, [data, pokemonList]);
 
@@ -45,13 +45,7 @@ function PokemonList(): JSX.Element {
         if (!fetchMoreResult) {
           return prevResult;
         }
-        setPokemonList(list =>
-          list.concat(
-            fetchMoreResult.pokemons.map(
-              (pokemonData: PokemonData) => new Pokemon(pokemonData),
-            ),
-          ),
-        );
+        setPokemonList(list => list.concat(fetchMoreResult.pokemons));
       },
     });
   };
@@ -96,19 +90,15 @@ function PokemonList(): JSX.Element {
           onChangeText={handleSearch}
         />
         {loading && pokemonList.length === 0 ? (
-          <SafeAreaView>
-            <Text>Loading...</Text>
-          </SafeAreaView>
+          <Text>Loading...</Text>
         ) : error ? (
-          <SafeAreaView>
-            <Text>Error: {error.message}</Text>
-          </SafeAreaView>
+          <Text>Error: {error.message}</Text>
         ) : (
           <FlatList
             style={style.list}
             data={search.length === 0 ? pokemonList : filteredPokemons}
-            renderItem={({item}) => <PokemonItem pokemon={item} />}
-            keyExtractor={(item, index) => index.toString()}
+            renderItem={item => <PokemonItem pokemon={item.item} />}
+            keyExtractor={(item: PokemonData) => item.id.toString()}
             ItemSeparatorComponent={separator}
             showsVerticalScrollIndicator={false}
             onEndReached={handleLoadMore}

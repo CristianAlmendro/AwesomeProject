@@ -5,15 +5,13 @@ export const GET_POKEMONS = gql`
     pokemons: pokemon_v2_pokemon(limit: $limit, offset: $offset) {
       id
       name
-      height
-      weight
-      types: pokemon_v2_pokemontypes {
-        pokemon_v2_type {
+      pokemonTypes: pokemon_v2_pokemontypes {
+        type: pokemon_v2_type {
           id
           name
         }
       }
-      generationData: pokemon_v2_pokemonspecy {
+      specy: pokemon_v2_pokemonspecy {
         generation: pokemon_v2_generation {
           id
           name
@@ -55,7 +53,10 @@ export const GET_POKEMON_DETAIL = gql`
           is_hidden
         }
         pokemon_v2_pokemontypes {
-          type_id
+          pokemon_v2_type {
+            name
+            id
+          }
         }
       }
       pokemon_v2_pokemonspeciesnames(where: {language_id: {_eq: 9}}) {

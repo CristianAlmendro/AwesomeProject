@@ -3,17 +3,16 @@ import {StyleSheet, Text, View} from 'react-native';
 import Colors from '../colors';
 import {getDynamicStyles} from '../dynamicStyles';
 import PokemonTypeSelector from './PokemonTypeSelector';
-import {PokemonType} from '../../models/Pokemon';
 import {uppercaseFirstLetter} from '../Utilities';
 
 interface PokemonBadgeProps {
-  item: PokemonType;
+  item: string;
 }
 
 function PokemonBadge({item}: PokemonBadgeProps) {
-  const dynamicStyles = getDynamicStyles(item.name);
-  const pokemonType = PokemonTypeSelector(item.name, 15, 15, Colors.white);
-  const typeName = uppercaseFirstLetter(item.name);
+  const dynamicStyles = getDynamicStyles(item);
+  const pokemonType = PokemonTypeSelector(item, 15, 15, Colors.white);
+  const typeName = uppercaseFirstLetter(item);
 
   return (
     <View style={dynamicStyles.type}>
