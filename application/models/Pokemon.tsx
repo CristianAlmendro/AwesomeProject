@@ -1,4 +1,4 @@
-interface PokemonType {
+export interface PokemonType {
   type: {
     id: number;
     name: string;

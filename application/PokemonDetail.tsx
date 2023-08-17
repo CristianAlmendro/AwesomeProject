@@ -30,8 +30,9 @@ const PokemonDetail = ({navigation}: NavigationProp) => {
   const {loading, error, data} = useQuery(GET_POKEMON_DETAIL, {
     variables: {_eq: pokemonId},
   });
+
   if (data && !pokemonDetail) {
-    setPokemonDetail(data.pokemon_v2_pokemonspecies[0]);
+    setPokemonDetail(data.pokemonDetail[0]);
   }
 
   const goBackToList = () => {
@@ -62,12 +63,11 @@ const PokemonDetail = ({navigation}: NavigationProp) => {
                 </Text>
                 <FlatList
                   style={style.pokemonBadge}
-                  data={
-                    pokemonDetail?.pokemon_v2_pokemons[0]
-                      .pokemon_v2_pokemontypes.pokemon_v2_type ?? []
-                  }
-                  renderItem={({item}) => <PokemonBadge item={item.name} />}
-                  keyExtractor={item => String(item.id)}
+                  data={pokemonDetail?.info[0].pokemonTypes}
+                  renderItem={({item}) => (
+                    <PokemonBadge item={item.type.name} />
+                  )}
+                  keyExtractor={item => String(item.type.id)}
                 />
               </View>
             </View>
@@ -85,15 +85,15 @@ const PokemonDetail = ({navigation}: NavigationProp) => {
             </Text>
             <Text style={style.pokemonBaseHappiness}>base_experience</Text>
             <Text style={style.pokemonBaseHappiness}>
-              {pokemonDetail?.pokemon_v2_pokemons[0].base_experience}
+              {pokemonDetail?.info[0].base_experience}
             </Text>
             <Text style={style.pokemonBaseHappiness}>height</Text>
             <Text style={style.pokemonBaseHappiness}>
-              {pokemonDetail?.pokemon_v2_pokemons[0].height}
+              {pokemonDetail?.info[0].height}
             </Text>
             <Text style={style.pokemonBaseHappiness}>weight</Text>
             <Text style={style.pokemonBaseHappiness}>
-              {pokemonDetail?.pokemon_v2_pokemons[0].weight}
+              {pokemonDetail?.info[0].weight}
             </Text>
           </View>
         )}

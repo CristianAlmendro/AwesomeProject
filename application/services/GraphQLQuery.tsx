@@ -23,13 +23,13 @@ export const GET_POKEMONS = gql`
 
 export const GET_POKEMON_DETAIL = gql`
   query getPokemonDetail($_eq: Int = 1) {
-    pokemon_v2_pokemonspecies(where: {id: {_eq: $_eq}}) {
+    pokemonDetail: pokemon_v2_pokemonspecies(where: {id: {_eq: $_eq}}) {
       base_happiness
       capture_rate
       hatch_counter
       name
       gender_rate
-      pokemon_v2_pokemons {
+      info: pokemon_v2_pokemons {
         base_experience
         height
         id
@@ -52,8 +52,8 @@ export const GET_POKEMON_DETAIL = gql`
           }
           is_hidden
         }
-        pokemon_v2_pokemontypes {
-          pokemon_v2_type {
+        pokemonTypes: pokemon_v2_pokemontypes {
+          type: pokemon_v2_type {
             name
             id
           }

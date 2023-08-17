@@ -28,10 +28,6 @@ function PokemonList(): JSX.Element {
     variables: {limit: limit, offset: 0},
   });
 
-  if (data) {
-    console.log(data.pokemons);
-  }
-
   useEffect(() => {
     if (data && pokemonList.length === 0) {
       setPokemonList(data.pokemons);

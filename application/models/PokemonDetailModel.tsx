@@ -1,4 +1,4 @@
-import {Pokemon_v2_type} from './Pokemon';
+import {PokemonType} from './Pokemon';
 
 export interface PokemonDetailData {
   base_happiness: number;
@@ -6,11 +6,7 @@ export interface PokemonDetailData {
   name: string;
   gender_rate: number;
   base_experience: number;
-  pokemon_v2_pokemons: Pokemon_v2_pokemons[];
-}
-
-interface Pokemon_v2_pokemontypes {
-  pokemon_v2_type: Pokemon_v2_type[];
+  info: Pokemon_v2_pokemons[];
 }
 
 interface Pokemon_v2_pokemons {
@@ -21,5 +17,5 @@ interface Pokemon_v2_pokemons {
   name: string;
   pokemon_species_id: number;
   weight: number;
-  pokemon_v2_pokemontypes: Pokemon_v2_pokemontypes;
+  pokemonTypes: PokemonType[];
 }
