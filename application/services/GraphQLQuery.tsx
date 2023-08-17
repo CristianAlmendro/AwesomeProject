@@ -37,8 +37,7 @@ export const GET_POKEMON_DETAIL = gql`
         name
         pokemon_species_id
         weight
-        pokemon_v2_pokemonstats(order_by: {stat_id: asc}) {
-          __typename
+        stats: pokemon_v2_pokemonstats(order_by: {stat_id: asc}) {
           base_stat
           stat_id
           effort
@@ -46,7 +45,7 @@ export const GET_POKEMON_DETAIL = gql`
             name
           }
         }
-        pokemon_v2_pokemonabilities(where: {}) {
+        abilities: pokemon_v2_pokemonabilities {
           pokemon_v2_ability {
             name
           }

@@ -22,7 +22,25 @@ interface Pokemon_v2_pokemons {
   name: string;
   pokemon_species_id: number;
   weight: number;
+  stats: PokemonStat[];
+  abilities: PokemonAbility[];
   pokemonTypes: PokemonType[];
+}
+
+interface PokemonAbility {
+  pokemon_v2_ability: {
+    name: string;
+  };
+  is_hidden: boolean;
+}
+
+interface PokemonStat {
+  base_stat: number;
+  stat_id: number;
+  effort: number;
+  pokemon_v2_stat: {
+    name: string;
+  };
 }
 
 interface Pokemon_v2_pokemonspeciesnames {
