@@ -21,6 +21,7 @@ import {
   uppercaseFirstLetter,
 } from './resources/Utilities';
 import PokemonBadge from './resources/components/PokemonBadge';
+import {getDynamicStyles} from './resources/dynamicStyles';
 
 const PokemonDetail = ({navigation}: NavigationProp) => {
   const route = useRoute();
@@ -39,64 +40,90 @@ const PokemonDetail = ({navigation}: NavigationProp) => {
     navigation.popToTop();
   };
 
+  const dynamicStyles = getDynamicStyles(
+    pokemonDetail?.info[0].pokemonTypes[0].type.name ?? '',
+  );
+
   return (
     <SafeAreaView style={style.container}>
-      <View style={style.headerContainer}>
-        <TouchableOpacity style={style.backButton} onPress={goBackToList}>
-          <BackIcon color={Colors.white} />
-        </TouchableOpacity>
-        {loading ? (
-          <Text>Loading data...</Text>
-        ) : (
-          <View style={style.pokemonInfoContainer}>
-            <View style={style.headerInfoContainer}>
-              <Image
-                style={style.pokemonImage}
-                source={{
-                  uri: getPokemonArtWork(pokemonId),
-                }}
-              />
-              <View style={style.basicInfo}>
-                <Text style={style.pokemonId}> {intToHexColor(pokemonId)}</Text>
-                <Text style={style.pokemonName}>
-                  {uppercaseFirstLetter(pokemonDetail?.name ?? '')}
-                </Text>
-                <FlatList
-                  style={style.pokemonBadge}
-                  data={pokemonDetail?.info[0].pokemonTypes}
-                  renderItem={({item}) => (
-                    <PokemonBadge item={item.type.name} />
-                  )}
-                  keyExtractor={item => String(item.type.id)}
-                />
+      <View style={dynamicStyles.background}>
+        <View style={style.headerContainer}>
+          <TouchableOpacity style={style.backButton} onPress={goBackToList}>
+            <BackIcon color={Colors.white} />
+          </TouchableOpacity>
+          {loading ? (
+            <Text>Loading data...</Text>
+          ) : (
+            <View style={style.pokemonContent}>
+              <View style={style.headerInfoContainer}>
+                <View style={style.pokemonImageContainer}>
+                  <Image
+                    style={style.pokemonImage}
+                    source={{
+                      uri: getPokemonArtWork(pokemonId),
+                    }}
+                  />
+                </View>
+                <View style={style.pokemonInfoContainer}>
+                  <Text style={style.pokemonId}>
+                    {intToHexColor(pokemonId)}
+                  </Text>
+                  <Text style={style.pokemonName}>
+                    {pokemonDetail?.name ?? ''}
+                  </Text>
+                  <FlatList
+                    style={style.pokemonBadge}
+                    data={pokemonDetail?.info[0].pokemonTypes}
+                    renderItem={({item}) => (
+                      <PokemonBadge item={item.type.name} />
+                    )}
+                    keyExtractor={item => String(item.type.id)}
+                  />
+                </View>
               </View>
             </View>
-            <Text style={style.pokemonBaseHappiness}>base_happiness</Text>
-            <Text style={style.pokemonBaseHappiness}>
-              {pokemonDetail?.base_happiness}
-            </Text>
-            <Text style={style.pokemonBaseHappiness}>capture_rate</Text>
-            <Text style={style.pokemonBaseHappiness}>
-              {pokemonDetail?.capture_rate}
-            </Text>
-            <Text style={style.pokemonBaseHappiness}>gender_rate</Text>
-            <Text style={style.pokemonBaseHappiness}>
-              {pokemonDetail?.gender_rate}
-            </Text>
-            <Text style={style.pokemonBaseHappiness}>base_experience</Text>
-            <Text style={style.pokemonBaseHappiness}>
-              {pokemonDetail?.info[0].base_experience}
-            </Text>
-            <Text style={style.pokemonBaseHappiness}>height</Text>
-            <Text style={style.pokemonBaseHappiness}>
-              {pokemonDetail?.info[0].height}
-            </Text>
-            <Text style={style.pokemonBaseHappiness}>weight</Text>
-            <Text style={style.pokemonBaseHappiness}>
-              {pokemonDetail?.info[0].weight}
-            </Text>
-          </View>
-        )}
+          )}
+        </View>
+        {/* BUTTONS */}
+        <View style={style.buttonSection}>
+          <TouchableOpacity>
+            <Text style={style.buttonSelected}>About</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity>
+            <Text style={style.buttonUnselected}>Stats</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity>
+            <Text style={style.buttonUnselected}>Evolution</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={style.card}>
+          <Text style={style.pokemonBaseHappiness}>base_happiness</Text>
+          <Text style={style.pokemonBaseHappiness}>
+            {pokemonDetail?.base_happiness}
+          </Text>
+          <Text style={style.pokemonBaseHappiness}>capture_rate</Text>
+          <Text style={style.pokemonBaseHappiness}>
+            {pokemonDetail?.capture_rate}
+          </Text>
+          <Text style={style.pokemonBaseHappiness}>gender_rate</Text>
+          <Text style={style.pokemonBaseHappiness}>
+            {pokemonDetail?.gender_rate}
+          </Text>
+          <Text style={style.pokemonBaseHappiness}>base_experience</Text>
+          <Text style={style.pokemonBaseHappiness}>
+            {pokemonDetail?.info[0].base_experience}
+          </Text>
+          <Text style={style.pokemonBaseHappiness}>height</Text>
+          <Text style={style.pokemonBaseHappiness}>
+            {pokemonDetail?.info[0].height}
+          </Text>
+          <Text style={style.pokemonBaseHappiness}>weight</Text>
+          <Text style={style.pokemonBaseHappiness}>
+            {pokemonDetail?.info[0].weight}
+          </Text>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -106,11 +133,9 @@ const style = StyleSheet.create({
   container: {
     display: 'flex',
     flex: 1,
-    backgroundColor: Colors.backgroundTypeGrass,
   },
   headerContainer: {
-    flexDirection: 'column',
-    marginHorizontal: 40,
+    marginLeft: 10,
   },
   backButton: {
     marginTop: 40,
@@ -118,13 +143,15 @@ const style = StyleSheet.create({
     height: 25,
   },
   pokemonBadge: {
+    marginTop: 5,
     flexDirection: 'row',
   },
   pokemonBaseHappiness: {
     fontSize: 14,
   },
   pokemonInfoContainer: {
-    flexDirection: 'column',
+    marginLeft: 20,
+    marginTop: 20,
   },
   pokemonImage: {
     width: 125,
@@ -140,8 +167,6 @@ const style = StyleSheet.create({
     flexDirection: 'row',
   },
   basicInfo: {
-    flexDirection: 'column',
-    justifyContent: 'center',
     left: 25,
   },
   pokemonName: {
@@ -149,6 +174,39 @@ const style = StyleSheet.create({
     fontStyle: 'normal',
     fontWeight: '700',
     color: Colors.white,
+  },
+  pokemonImageContainer: {
+    zIndex: 2,
+  },
+  pokemonContent: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    height: 140,
+  },
+  buttonSection: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginBottom: 15,
+    marginTop: 61,
+  },
+  buttonSelected: {
+    color: Colors.white,
+    fontSize: 16,
+    fontWeight: '700',
+    fontStyle: 'normal',
+  },
+  buttonUnselected: {
+    color: Colors.white,
+    fontSize: 16,
+    fontWeight: '400',
+    fontStyle: 'normal',
+    opacity: 0.5,
+  },
+  card: {
+    backgroundColor: Colors.white,
+    padding: 40,
+    borderTopLeftRadius: 38,
+    borderTopRightRadius: 38,
   },
 });
 
