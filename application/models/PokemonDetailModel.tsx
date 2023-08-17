@@ -7,6 +7,11 @@ export interface PokemonDetailData {
   gender_rate: number;
   base_experience: number;
   info: Pokemon_v2_pokemons[];
+  speciesNames: Pokemon_v2_pokemonspeciesnames[];
+  evolutionChain: {
+    id: number;
+    species: PokemonSpecies[];
+  };
 }
 
 interface Pokemon_v2_pokemons {
@@ -18,4 +23,40 @@ interface Pokemon_v2_pokemons {
   pokemon_species_id: number;
   weight: number;
   pokemonTypes: PokemonType[];
+}
+
+interface Pokemon_v2_pokemonspeciesnames {
+  genus: string;
+  language_id: number;
+}
+
+interface EvolutionTrigger {
+  id: number;
+  name: string;
+}
+
+interface EvolutionItem {
+  id: number;
+  name: string;
+}
+
+interface PokemonEvolution {
+  min_level: number;
+  pokemon_v2_evolutiontrigger: EvolutionTrigger;
+  pokemon_v2_item: EvolutionItem;
+  min_affection: number;
+  min_beauty: number;
+  min_happiness: number;
+  time_of_day: string;
+}
+
+interface PokemonSpecies {
+  id: number;
+  name: string;
+  order: number;
+  pokemon_v2_pokemonevolutions: PokemonEvolution[];
+  speciesFlavorTexts: {
+    flavor_text: string;
+    version_id: number;
+  }[];
 }

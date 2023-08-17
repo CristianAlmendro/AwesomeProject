@@ -59,21 +59,23 @@ export const GET_POKEMON_DETAIL = gql`
           }
         }
       }
-      pokemon_v2_pokemonspeciesnames(where: {language_id: {_eq: 9}}) {
+      speciesNames: pokemon_v2_pokemonspeciesnames(
+        where: {language_id: {_eq: 9}}
+      ) {
         genus
         language_id
       }
-      pokemon_v2_growthrate {
+      growthRate: pokemon_v2_growthrate {
         name
         id
       }
-      pokemon_v2_pokemonegggroups {
+      eggGroups: pokemon_v2_pokemonegggroups {
         pokemon_v2_egggroup {
           name
           id
         }
       }
-      pokemon_v2_pokemondexnumbers {
+      dexNumbers: pokemon_v2_pokemondexnumbers {
         pokemon_v2_pokedex {
           pokemon_v2_pokedexdescriptions(where: {language_id: {_eq: 9}}) {
             description
@@ -84,9 +86,9 @@ export const GET_POKEMON_DETAIL = gql`
         }
         pokedex_number
       }
-      pokemon_v2_evolutionchain {
+      evolutionChain: pokemon_v2_evolutionchain {
         id
-        pokemon_v2_pokemonspecies(order_by: {order: asc}) {
+        species: pokemon_v2_pokemonspecies(order_by: {order: asc}) {
           id
           name
           pokemon_v2_pokemonevolutions {
@@ -105,8 +107,8 @@ export const GET_POKEMON_DETAIL = gql`
             time_of_day
           }
           order
-          pokemon_v2_pokemonspeciesflavortexts(
-            where: {language_id: {_eq: 9}}
+          speciesFlavorTexts: pokemon_v2_pokemonspeciesflavortexts(
+            where: {language_id: {_eq: 9}, version_id: {_eq: 26}}
             order_by: {id: desc}
           ) {
             flavor_text

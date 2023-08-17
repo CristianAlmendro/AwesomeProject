@@ -64,5 +64,13 @@ export const getDynamicStyles = (textColor: string) => {
       backgroundColor: typeColor,
       marginRight: 5,
     },
+    sectionTitle: {
+      color: typeColor,
+      fontSize: 16,
+      fontWeight: '700',
+      fontStyle: 'normal',
+      marginTop: 30,
+      marginBottom: 20,
+    },
   });
 };

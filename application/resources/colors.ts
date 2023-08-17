@@ -7,7 +7,7 @@ const Colors = {
   text: '#333333',
   textGray: '#747476',
   textPokemonId: '#17171b99',
-  textBlack: '#000000',
+  textBlack: '#17171B',
   textNumber: '#17171B99',
   white: '#FFFFFF',
   black: '#000000',

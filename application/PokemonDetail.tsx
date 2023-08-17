@@ -15,19 +15,19 @@ import {GET_POKEMON_DETAIL} from './services/GraphQLQuery';
 import {useQuery} from '@apollo/client';
 import {NavigationProp} from './resources/Types';
 import {PokemonDetailData} from './models/PokemonDetailModel';
-import {
-  getPokemonArtWork,
-  intToHexColor,
-  uppercaseFirstLetter,
-} from './resources/Utilities';
+import {getPokemonArtWork, intToHexColor} from './resources/Utilities';
 import PokemonBadge from './resources/components/PokemonBadge';
 import {getDynamicStyles} from './resources/dynamicStyles';
+import CardAbout from './resources/components/CardAbout';
+import CardStats from './resources/components/CardStats';
+import CardEvolution from './resources/components/CardEvolution';
 
 const PokemonDetail = ({navigation}: NavigationProp) => {
   const route = useRoute();
   const {pokemonId} = route.params;
 
   const [pokemonDetail, setPokemonDetail] = useState<PokemonDetailData>();
+  const [cardSelected, setCardSelected] = useState<number>(0);
   const {loading, error, data} = useQuery(GET_POKEMON_DETAIL, {
     variables: {_eq: pokemonId},
   });
@@ -43,6 +43,10 @@ const PokemonDetail = ({navigation}: NavigationProp) => {
   const dynamicStyles = getDynamicStyles(
     pokemonDetail?.info[0].pokemonTypes[0].type.name ?? '',
   );
+
+  const handleCardSelection = (cardId: number) => {
+    setCardSelected(cardId);
+  };
 
   return (
     <SafeAreaView style={style.container}>
@@ -86,43 +90,47 @@ const PokemonDetail = ({navigation}: NavigationProp) => {
         </View>
         {/* BUTTONS */}
         <View style={style.buttonSection}>
-          <TouchableOpacity>
-            <Text style={style.buttonSelected}>About</Text>
+          <TouchableOpacity onPress={() => handleCardSelection(0)}>
+            <Text
+              style={
+                cardSelected === 0
+                  ? style.buttonSelected
+                  : style.buttonUnselected
+              }>
+              About
+            </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity>
-            <Text style={style.buttonUnselected}>Stats</Text>
+          <TouchableOpacity onPress={() => handleCardSelection(1)}>
+            <Text
+              style={
+                cardSelected === 1
+                  ? style.buttonSelected
+                  : style.buttonUnselected
+              }>
+              Stats
+            </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity>
-            <Text style={style.buttonUnselected}>Evolution</Text>
+          <TouchableOpacity onPress={() => handleCardSelection(2)}>
+            <Text
+              style={
+                cardSelected === 2
+                  ? style.buttonSelected
+                  : style.buttonUnselected
+              }>
+              Evolution
+            </Text>
           </TouchableOpacity>
         </View>
         <View style={style.card}>
-          <Text style={style.pokemonBaseHappiness}>base_happiness</Text>
-          <Text style={style.pokemonBaseHappiness}>
-            {pokemonDetail?.base_happiness}
-          </Text>
-          <Text style={style.pokemonBaseHappiness}>capture_rate</Text>
-          <Text style={style.pokemonBaseHappiness}>
-            {pokemonDetail?.capture_rate}
-          </Text>
-          <Text style={style.pokemonBaseHappiness}>gender_rate</Text>
-          <Text style={style.pokemonBaseHappiness}>
-            {pokemonDetail?.gender_rate}
-          </Text>
-          <Text style={style.pokemonBaseHappiness}>base_experience</Text>
-          <Text style={style.pokemonBaseHappiness}>
-            {pokemonDetail?.info[0].base_experience}
-          </Text>
-          <Text style={style.pokemonBaseHappiness}>height</Text>
-          <Text style={style.pokemonBaseHappiness}>
-            {pokemonDetail?.info[0].height}
-          </Text>
-          <Text style={style.pokemonBaseHappiness}>weight</Text>
-          <Text style={style.pokemonBaseHappiness}>
-            {pokemonDetail?.info[0].weight}
-          </Text>
+          {cardSelected === 0 ? (
+            <CardAbout pokemonDetail={pokemonDetail} />
+          ) : cardSelected === 1 ? (
+            <CardStats />
+          ) : (
+            <CardEvolution />
+          )}
         </View>
       </View>
     </SafeAreaView>
