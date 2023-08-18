@@ -29,3 +29,9 @@ export function convertToFormattedWeight(weightInKilograms: number) {
 
   return `${kilograms.toFixed(1)}kg (${pounds.toFixed(1)} lbs)`;
 }
+
+export function genderRateCalculation(genderRate: number) {
+  const male = (genderRate / 8) * 100;
+  const female = 100 - male;
+  return [male, female];
+}

@@ -6,6 +6,7 @@ import {getDynamicStyles} from '../dynamicStyles';
 import {
   convertToFormattedDistance,
   convertToFormattedWeight,
+  genderRateCalculation,
   uppercaseFirstLetter,
 } from '../Utilities';
 
@@ -31,8 +32,13 @@ export default function CardAbout({pokemonDetail}: CardAboutProps) {
     )}`}</Text>
   );
 
+  const growthRate = uppercaseFirstLetter(pokemonDetail?.growthRate.name);
+  const genderRate: number[] = genderRateCalculation(
+    pokemonDetail?.gender_rate,
+  );
+
   return (
-    <ScrollView>
+    <ScrollView style={styles.container}>
       <Text style={styles.dataResult}>
         {
           pokemonDetail?.evolutionChain.species[0].speciesFlavorTexts[0]
@@ -72,11 +78,75 @@ export default function CardAbout({pokemonDetail}: CardAboutProps) {
           {pokemonDetail?.info[0].abilities[0].pokemon_v2_ability.name}
         </Text>
       </View>
+      <Text style={dynamicStyles.sectionTitle}>Training</Text>
+
+      <View style={styles.pokemonData}>
+        <Text style={styles.dataTitle}>EV Yield</Text>
+        <View style={styles.abilities}>
+          {pokemonDetail?.info[0].stats
+            .filter(stat => stat.base_stat === 65)
+            .map((item, index) => (
+              <RenderItem index={index} name={item.pokemon_v2_stat.name} />
+            ))}
+        </View>
+      </View>
+
+      <View style={styles.pokemonData}>
+        <Text style={styles.dataTitle}>Catch Rate</Text>
+        <Text style={styles.dataResult}>{height}</Text>
+      </View>
+
+      <View style={styles.pokemonData}>
+        <Text style={styles.dataTitle}>Base Friendship</Text>
+        <Text style={styles.dataResult}>{pokemonDetail?.base_happiness}</Text>
+      </View>
+
+      <View style={styles.pokemonData}>
+        <Text style={styles.dataTitle}>Base Exp</Text>
+        <Text style={styles.dataResult}>
+          {pokemonDetail?.info[0].base_experience}
+        </Text>
+      </View>
+
+      <View style={styles.pokemonData}>
+        <Text style={styles.dataTitle}>Growth Rate</Text>
+        <Text style={styles.dataResult}>{growthRate}</Text>
+      </View>
+      <Text style={dynamicStyles.sectionTitle}>Breeding</Text>
+
+      <View style={styles.pokemonData}>
+        <Text style={styles.dataTitle}>Gender</Text>
+        <View style={styles.genderRate}>
+          <Text style={styles.genderMale}>♀{genderRate[1]},</Text>
+          <Text style={styles.genderFemale}>♂{genderRate[0]}</Text>
+        </View>
+      </View>
+
+      <View style={styles.pokemonData}>
+        <Text style={styles.dataTitle}>Egg Groups</Text>
+        <View style={styles.abilities}>
+          {pokemonDetail?.eggGroups.map((item, index) => (
+            <RenderItem index={index} name={item.pokemon_v2_egggroup.name} />
+          ))}
+        </View>
+      </View>
+
+      <View style={styles.pokemonData}>
+        <Text style={styles.dataTitle}>Egg Cycles</Text>
+        <Text style={styles.dataResult}>
+          {pokemonDetail?.info[0].base_experience}
+        </Text>
+      </View>
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    display: 'flex',
+    height: 400,
+    flexDirection: 'column',
+  },
   pokemonData: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -86,7 +156,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontStyle: 'normal',
     fontWeight: '500',
-    width: 85,
+    width: 100,
     color: Colors.textBlack,
   },
   dataResult: {
@@ -97,5 +167,20 @@ const styles = StyleSheet.create({
   },
   abilities: {
     flexDirection: 'column',
+  },
+  genderRate: {
+    flexDirection: 'row',
+  },
+  genderMale: {
+    fontSize: 16,
+    color: Colors.typeFlying,
+    fontWeight: '400',
+    fontStyle: 'normal',
+  },
+  genderFemale: {
+    fontSize: 16,
+    color: Colors.typeFairy,
+    fontWeight: '400',
+    fontStyle: 'normal',
   },
 });

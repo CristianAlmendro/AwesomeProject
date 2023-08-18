@@ -8,6 +8,8 @@ export interface PokemonDetailData {
   base_experience: number;
   info: Pokemon_v2_pokemons[];
   speciesNames: Pokemon_v2_pokemonspeciesnames[];
+  growthRate: GrowthRate;
+  eggGroups: EggGroup[];
   evolutionChain: {
     id: number;
     species: PokemonSpecies[];
@@ -77,4 +79,16 @@ interface PokemonSpecies {
     flavor_text: string;
     version_id: number;
   }[];
+}
+
+interface GrowthRate {
+  name: string;
+  id: number;
+}
+
+interface EggGroup {
+  pokemon_v2_egggroup: {
+    name: string;
+    id: number;
+  };
 }
