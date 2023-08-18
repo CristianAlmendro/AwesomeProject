@@ -13,6 +13,7 @@ import {
   uppercaseFirstLetter,
 } from '../Utilities';
 import Colors from '../colors';
+import PokemonTypeSelector from './PokemonTypeSelector';
 
 export default function CardStats({pokemonDetail}: PokemonDetailProps) {
   if (!pokemonDetail) {
@@ -35,8 +36,10 @@ export default function CardStats({pokemonDetail}: PokemonDetailProps) {
   );
 
   const renderItem = ({item}) => (
-    <View>
-      <Text>{item.attackType}</Text>
+    <View style={styles.typeDefenseItem}>
+      <View style={getDynamicStyles(item.attackType).defenseType}>
+        {PokemonTypeSelector(item.attackType, 15, 15, Colors.white)}
+      </View>
       <Text>{item.defenseMultiplier}</Text>
     </View>
   );
@@ -80,9 +83,12 @@ export default function CardStats({pokemonDetail}: PokemonDetailProps) {
         are based on a hindering nature, 0 EVs, 0 IVs.
       </Text>
       <Text style={dynamicStyles.sectionTitle}>Type Defenses</Text>
-      <Text>The effectiveness of each type on {name}</Text>
       <View>
+        <Text style={styles.typeDefensesDescription}>
+          The effectiveness of each type on {name}
+        </Text>
         <FlatList
+          style={styles.typeDefenses}
           data={defenseData}
           renderItem={renderItem}
           keyExtractor={item => item.attackType}
@@ -95,6 +101,7 @@ export default function CardStats({pokemonDetail}: PokemonDetailProps) {
 const styles = StyleSheet.create({
   container: {
     height: 400,
+    display: 'flex',
   },
   baseStats: {
     flexDirection: 'row',
@@ -131,6 +138,23 @@ const styles = StyleSheet.create({
   statDescription: {
     marginTop: 5,
     fontSize: 12,
+    fontStyle: 'normal',
+    fontWeight: '500',
+    color: Colors.textGray,
+  },
+  typeDefenses: {
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+  },
+
+  typeDefenseItem: {
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  typeDefensesDescription: {
+    marginTop: 5,
+    marginBottom: 20,
+    fontSize: 16,
     fontStyle: 'normal',
     fontWeight: '500',
     color: Colors.textGray,

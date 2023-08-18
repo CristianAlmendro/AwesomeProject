@@ -75,5 +75,13 @@ export const getDynamicStyles = (textColor: string) => {
     typeColor: {
       color: typeColor,
     },
+    defenseType: {
+      display: 'flex',
+      borderRadius: 3,
+      backgroundColor: typeColor,
+      gap: 5,
+      alignItems: 'center',
+      padding: 5,
+    },
   });
 };
