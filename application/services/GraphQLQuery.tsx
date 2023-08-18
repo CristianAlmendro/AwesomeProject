@@ -74,9 +74,11 @@ export const GET_POKEMON_DETAIL = gql`
           id
         }
       }
-      dexNumbers: pokemon_v2_pokemondexnumbers {
+      numbers: pokemon_v2_pokemondexnumbers {
         pokemon_v2_pokedex {
-          pokemon_v2_pokedexdescriptions(where: {language_id: {_eq: 9}}) {
+          pokedexDescriptions: pokemon_v2_pokedexdescriptions(
+            where: {language_id: {_eq: 9}}
+          ) {
             description
           }
           pokemon_v2_pokedexnames(where: {language_id: {_eq: 9}}) {

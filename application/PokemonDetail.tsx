@@ -127,7 +127,7 @@ const PokemonDetail = ({navigation}: NavigationProp) => {
           {cardSelected === 0 ? (
             <CardAbout pokemonDetail={pokemonDetail} />
           ) : cardSelected === 1 ? (
-            <CardStats />
+            <CardStats pokemonDetail={pokemonDetail} />
           ) : (
             <CardEvolution />
           )}

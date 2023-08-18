@@ -6,15 +6,13 @@ import {getDynamicStyles} from '../dynamicStyles';
 import {
   convertToFormattedDistance,
   convertToFormattedWeight,
+  convertToPaddedString,
   genderRateCalculation,
   uppercaseFirstLetter,
 } from '../Utilities';
+import {PokemonDetailProps} from '../Types';
 
-interface CardAboutProps {
-  pokemonDetail?: PokemonDetailData;
-}
-
-export default function CardAbout({pokemonDetail}: CardAboutProps) {
+export default function CardAbout({pokemonDetail}: PokemonDetailProps) {
   if (!pokemonDetail) {
     return <Text>Loading...</Text>;
   }
@@ -137,6 +135,17 @@ export default function CardAbout({pokemonDetail}: CardAboutProps) {
           {pokemonDetail?.info[0].base_experience}
         </Text>
       </View>
+      <Text style={dynamicStyles.sectionTitle}>Location</Text>
+      {pokemonDetail.numbers.map(number => (
+        <View style={styles.pokemonData}>
+          <Text style={styles.dataTitle}>
+            {convertToPaddedString(number.pokedex_number, 3)}
+          </Text>
+          <Text style={styles.dataResult}>
+            {number.pokemon_v2_pokedex.pokedexDescriptions[0].description}
+          </Text>
+        </View>
+      ))}
     </ScrollView>
   );
 }

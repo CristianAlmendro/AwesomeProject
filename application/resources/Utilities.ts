@@ -35,3 +35,23 @@ export function genderRateCalculation(genderRate: number) {
   const female = 100 - male;
   return [male, female];
 }
+
+export function convertToPaddedString(numberToConvert: number, length: number) {
+  return numberToConvert.toString().padStart(length, '0');
+}
+
+export function calculateMinStat(baseStat: number, statName: string) {
+  if (statName === 'hp') {
+    return Math.round(baseStat * 2 + 110);
+  } else {
+    return Math.round((baseStat * 2 + 5) * 0.9);
+  }
+}
+
+export function calculateMaxStat(baseStat: number, statName: string) {
+  if (statName === 'hp') {
+    return Math.round(baseStat * 2 + 204);
+  } else {
+    return Math.round((baseStat * 2 + 99) * 1.1);
+  }
+}

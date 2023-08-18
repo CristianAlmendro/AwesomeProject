@@ -10,6 +10,7 @@ export interface PokemonDetailData {
   speciesNames: Pokemon_v2_pokemonspeciesnames[];
   growthRate: GrowthRate;
   eggGroups: EggGroup[];
+  numbers: Numbers[];
   evolutionChain: {
     id: number;
     species: PokemonSpecies[];
@@ -91,4 +92,20 @@ interface EggGroup {
     name: string;
     id: number;
   };
+}
+
+interface Numbers {
+  pokemon_v2_pokedex: {
+    pokedexDescriptions: PokedexDescription[];
+    pokemon_v2_pokedexnames: PokedexName[];
+  };
+  pokedex_number: number;
+}
+
+interface PokedexDescription {
+  description: string;
+}
+
+interface PokedexName {
+  name: string;
 }
