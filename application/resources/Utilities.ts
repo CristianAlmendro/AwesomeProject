@@ -55,3 +55,28 @@ export function calculateMaxStat(baseStat: number, statName: string) {
     return Math.round((baseStat * 2 + 99) * 1.1);
   }
 }
+
+export function calculateProgressBar(baseStat: number) {
+  const maxValue = calculateMaxStat(baseStat, '');
+  const result = baseStat / calculateMaxStat(baseStat, '');
+  return [result, maxValue];
+}
+
+export function getStatName(statName: string) {
+  switch (statName) {
+    case 'hp':
+      return 'HP';
+    case 'attack':
+      return 'Attack';
+    case 'defense':
+      return 'Defense';
+    case 'special-attack':
+      return 'Sp. Atk';
+    case 'special-defense':
+      return 'Sp. Def';
+    case 'speed':
+      return 'Speed';
+    default:
+      return '';
+  }
+}

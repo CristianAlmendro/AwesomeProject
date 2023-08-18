@@ -72,5 +72,8 @@ export const getDynamicStyles = (textColor: string) => {
       marginTop: 30,
       marginBottom: 20,
     },
+    typeColor: {
+      color: typeColor,
+    },
   });
 };
