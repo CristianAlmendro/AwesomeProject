@@ -1,4 +1,5 @@
 import React from 'react';
+import {useNavigation} from '@react-navigation/native';
 import {
   FlatList,
   Image,
@@ -7,18 +8,17 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import Colors from '../colors';
-import PokemonBadge from './PokemonBadge';
-import {getDynamicStyles} from '../dynamicStyles';
 import {PokemonData} from '../../models/Pokemon';
-import {useNavigation} from '@react-navigation/native';
 import {
   getPokemonArtWork,
   intToHexColor,
   uppercaseFirstLetter,
 } from '../Utilities';
+import Colors from '../colors';
+import {getDynamicStyles} from '../dynamicStyles';
 import Pattern from '../icons/Pattern';
 import Pokeball from '../icons/Pokeball';
+import PokemonBadge from './PokemonBadge';
 
 interface PokemonItemProps {
   pokemon: PokemonData;

@@ -1,3 +1,5 @@
+import {useQuery} from '@apollo/client';
+import {useRoute} from '@react-navigation/native';
 import React, {useState} from 'react';
 import {
   FlatList,
@@ -8,19 +10,17 @@ import {
   View,
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import BackIcon from './resources/icons/BackIcon';
-import Colors from './resources/colors';
-import {useRoute} from '@react-navigation/native';
-import {GET_POKEMON_DETAIL} from './services/GraphQLQuery';
-import {useQuery} from '@apollo/client';
-import {NavigationProp} from './resources/Types';
 import {PokemonDetailData} from './models/PokemonDetailModel';
+import {NavigationProp} from './resources/Types';
 import {getPokemonArtWork, intToHexColor} from './resources/Utilities';
+import Colors from './resources/colors';
+import CardAbout from './resources/components/CardAbout';
+import CardEvolution from './resources/components/CardEvolution';
+import CardStats from './resources/components/CardStats';
 import PokemonBadge from './resources/components/PokemonBadge';
 import {getDynamicStyles} from './resources/dynamicStyles';
-import CardAbout from './resources/components/CardAbout';
-import CardStats from './resources/components/CardStats';
-import CardEvolution from './resources/components/CardEvolution';
+import BackIcon from './resources/icons/BackIcon';
+import {GET_POKEMON_DETAIL} from './services/GraphQLQuery';
 
 const PokemonDetail = ({navigation}: NavigationProp) => {
   const route = useRoute();

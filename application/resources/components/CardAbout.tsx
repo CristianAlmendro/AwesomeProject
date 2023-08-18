@@ -1,8 +1,6 @@
-import {FlatList, ScrollView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {PokemonDetailData} from '../../models/PokemonDetailModel';
-import Colors from '../colors';
-import {getDynamicStyles} from '../dynamicStyles';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {PokemonDetailProps} from '../Types';
 import {
   convertToFormattedDistance,
   convertToFormattedWeight,
@@ -10,7 +8,8 @@ import {
   genderRateCalculation,
   uppercaseFirstLetter,
 } from '../Utilities';
-import {PokemonDetailProps} from '../Types';
+import Colors from '../colors';
+import {getDynamicStyles} from '../dynamicStyles';
 
 export default function CardAbout({pokemonDetail}: PokemonDetailProps) {
   if (!pokemonDetail) {

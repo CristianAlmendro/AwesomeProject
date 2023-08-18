@@ -1,18 +1,17 @@
-import {FlatList, ScrollView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {PokemonDetailProps} from '../Types';
-import {getDynamicStyles} from '../dynamicStyles';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import * as Progress from 'react-native-progress';
+import {PokemonDetailProps} from '../Types';
 import {
   calculateMaxStat,
   calculateMinStat,
   calculateProgressBar,
   calculateTypeDefenses,
   getStatName,
-  typeNames,
   uppercaseFirstLetter,
 } from '../Utilities';
 import Colors from '../colors';
+import {getDynamicStyles} from '../dynamicStyles';
 import PokemonTypeSelector from './PokemonTypeSelector';
 
 export default function CardStats({pokemonDetail}: PokemonDetailProps) {
@@ -25,23 +24,12 @@ export default function CardStats({pokemonDetail}: PokemonDetailProps) {
   );
 
   const types = pokemonDetail.info[0].pokemonTypes.map(type => type.type.name);
-  console.log(types);
   const defenses = calculateTypeDefenses(types);
-  console.log(defenses);
   const defenseData = Object.entries(defenses).map(
     ([attackType, defenseMultiplier]) => ({
       attackType,
       defenseMultiplier,
     }),
-  );
-
-  const renderItem = ({item}) => (
-    <View style={styles.typeDefenseItem}>
-      <View style={getDynamicStyles(item.attackType).defenseType}>
-        {PokemonTypeSelector(item.attackType, 15, 15, Colors.white)}
-      </View>
-      <Text>{item.defenseMultiplier}</Text>
-    </View>
   );
 
   const name = uppercaseFirstLetter(pokemonDetail.name);
@@ -87,12 +75,18 @@ export default function CardStats({pokemonDetail}: PokemonDetailProps) {
         <Text style={styles.typeDefensesDescription}>
           The effectiveness of each type on {name}
         </Text>
-        <FlatList
-          style={styles.typeDefenses}
-          data={defenseData}
-          renderItem={renderItem}
-          keyExtractor={item => item.attackType}
-        />
+        <View style={styles.typeDefenses}>
+          {defenseData.map(item => (
+            <View style={styles.typeDefenseItem}>
+              <View style={getDynamicStyles(item.attackType).defenseType}>
+                {PokemonTypeSelector(item.attackType, 15, 15, Colors.white)}
+              </View>
+              <Text style={styles.typeDefenseMultiplier}>
+                {item.defenseMultiplier}
+              </Text>
+            </View>
+          ))}
+        </View>
       </View>
     </ScrollView>
   );
@@ -146,10 +140,11 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     flexDirection: 'row',
   },
-
   typeDefenseItem: {
     flexDirection: 'column',
     alignItems: 'center',
+    marginRight: 12,
+    marginBottom: 20,
   },
   typeDefensesDescription: {
     marginTop: 5,
@@ -157,6 +152,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontStyle: 'normal',
     fontWeight: '500',
+    color: Colors.textGray,
+  },
+  typeDefenseMultiplier: {
+    marginTop: 10,
+    fontSize: 16,
+    fontStyle: 'normal',
+    fontWeight: '400',
     color: Colors.textGray,
   },
 });

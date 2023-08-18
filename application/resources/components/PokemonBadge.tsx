@@ -1,9 +1,9 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import {uppercaseFirstLetter} from '../Utilities';
 import Colors from '../colors';
 import {getDynamicStyles} from '../dynamicStyles';
 import PokemonTypeSelector from './PokemonTypeSelector';
-import {uppercaseFirstLetter} from '../Utilities';
 
 interface PokemonBadgeProps {
   item: string;

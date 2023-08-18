@@ -1,22 +1,22 @@
+import {useQuery} from '@apollo/client';
 import React, {useEffect, useState} from 'react';
 import {
   FlatList,
   SafeAreaView,
-  Text,
-  View,
-  TouchableOpacity,
   StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
-import PokemonItem from './resources/components/PokemonItem';
+import {PokemonData} from './models/Pokemon';
 import Colors from './resources/colors';
 import CustomTextInput from './resources/components/CustomTextField';
-import {useQuery} from '@apollo/client';
+import PokemonItem from './resources/components/PokemonItem';
 import FilterIcon from './resources/icons/FilterIcon';
 import GenerationIcon from './resources/icons/GenerationIcon';
+import PokeballIcon from './resources/icons/PokeballIcon';
 import SortIcon from './resources/icons/SortIcon';
 import {GET_POKEMONS} from './services/GraphQLQuery';
-import {PokemonData} from './models/Pokemon';
-import PokeballIcon from './resources/icons/PokeballIcon';
 
 const limit = 10;
 
