@@ -1,4 +1,4 @@
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {FlatList, ScrollView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {PokemonDetailProps} from '../Types';
 import {getDynamicStyles} from '../dynamicStyles';
@@ -7,7 +7,10 @@ import {
   calculateMaxStat,
   calculateMinStat,
   calculateProgressBar,
+  calculateTypeDefenses,
   getStatName,
+  typeNames,
+  uppercaseFirstLetter,
 } from '../Utilities';
 import Colors from '../colors';
 
@@ -19,6 +22,26 @@ export default function CardStats({pokemonDetail}: PokemonDetailProps) {
   const dynamicStyles = getDynamicStyles(
     pokemonDetail?.info[0].pokemonTypes[0].type.name ?? '',
   );
+
+  const types = pokemonDetail.info[0].pokemonTypes.map(type => type.type.name);
+  console.log(types);
+  const defenses = calculateTypeDefenses(types);
+  console.log(defenses);
+  const defenseData = Object.entries(defenses).map(
+    ([attackType, defenseMultiplier]) => ({
+      attackType,
+      defenseMultiplier,
+    }),
+  );
+
+  const renderItem = ({item}) => (
+    <View>
+      <Text>{item.attackType}</Text>
+      <Text>{item.defenseMultiplier}</Text>
+    </View>
+  );
+
+  const name = uppercaseFirstLetter(pokemonDetail.name);
 
   return (
     <ScrollView style={styles.container}>
@@ -57,7 +80,14 @@ export default function CardStats({pokemonDetail}: PokemonDetailProps) {
         are based on a hindering nature, 0 EVs, 0 IVs.
       </Text>
       <Text style={dynamicStyles.sectionTitle}>Type Defenses</Text>
-      <Text>The effectiveness of each type on POKEMONNAME</Text>
+      <Text>The effectiveness of each type on {name}</Text>
+      <View>
+        <FlatList
+          data={defenseData}
+          renderItem={renderItem}
+          keyExtractor={item => item.attackType}
+        />
+      </View>
     </ScrollView>
   );
 }
