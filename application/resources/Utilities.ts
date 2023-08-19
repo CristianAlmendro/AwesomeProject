@@ -1,4 +1,4 @@
-export const intToHexColor = (id: number) => {
+export const intPadZeros = (id: number) => {
   const paddedNumber = String(id).padStart(3, '0');
   return `#${paddedNumber}`;
 };

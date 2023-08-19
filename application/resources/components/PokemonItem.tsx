@@ -1,5 +1,5 @@
-import React from 'react';
 import {useNavigation} from '@react-navigation/native';
+import React from 'react';
 import {
   FlatList,
   Image,
@@ -11,7 +11,7 @@ import {
 import {PokemonData} from '../../models/Pokemon';
 import {
   getPokemonArtWork,
-  intToHexColor,
+  intPadZeros,
   uppercaseFirstLetter,
 } from '../Utilities';
 import Colors from '../colors';
@@ -39,7 +39,7 @@ function PokemonItem({pokemon}: PokemonItemProps) {
         <View style={dynamicStyles.background}>
           <View style={style.pokemonContent}>
             <View style={style.pokemonInfoContainer}>
-              <Text style={style.pokemonId}> {intToHexColor(pokemon.id)}</Text>
+              <Text style={style.pokemonId}> {intPadZeros(pokemon.id)}</Text>
               <Text style={style.pokemonName}>{pokemonName}</Text>
               <FlatList
                 style={style.pokemonBadge}
