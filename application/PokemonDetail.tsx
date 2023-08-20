@@ -13,13 +13,14 @@ import DetailHeader from './resources/components/DetailHeader';
 import {getDynamicStyles} from './resources/dynamicStyles';
 import BackIcon from './resources/icons/BackIcon';
 import {GET_POKEMON_DETAIL} from './services/GraphQLQuery';
+import DetailTabs from './resources/components/DetailTabs';
 
 const PokemonDetail = ({navigation}: NavigationProp) => {
   const route = useRoute();
   const {pokemonId} = route.params;
 
   const [pokemonDetail, setPokemonDetail] = useState<PokemonDetailData>();
-  const [cardSelected, setCardSelected] = useState<number>(0);
+  const [tabSelected, setTabSelected] = useState<number>(0);
   const {loading, error, data} = useQuery(GET_POKEMON_DETAIL, {
     variables: {_eq: pokemonId},
   });
@@ -37,7 +38,7 @@ const PokemonDetail = ({navigation}: NavigationProp) => {
   );
 
   const handleCardSelection = (cardId: number) => {
-    setCardSelected(cardId);
+    setTabSelected(cardId);
   };
 
   return (
@@ -50,40 +51,16 @@ const PokemonDetail = ({navigation}: NavigationProp) => {
           <DetailHeader pokemonDetail={pokemonDetail} />
         </View>
       </SafeAreaView>
-
-      {/* BUTTONS */}
-      <View style={style.buttonSection}>
-        <TouchableOpacity onPress={() => handleCardSelection(0)}>
-          <Text
-            style={
-              cardSelected === 0 ? style.buttonSelected : style.buttonUnselected
-            }>
-            About
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => handleCardSelection(1)}>
-          <Text
-            style={
-              cardSelected === 1 ? style.buttonSelected : style.buttonUnselected
-            }>
-            Stats
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => handleCardSelection(2)}>
-          <Text
-            style={
-              cardSelected === 2 ? style.buttonSelected : style.buttonUnselected
-            }>
-            Evolution
-          </Text>
-        </TouchableOpacity>
+      <View>
+        <DetailTabs
+          tabSelected={tabSelected}
+          setTabSelected={handleCardSelection}
+        />
       </View>
       <View style={style.cardsContainer}>
-        {cardSelected === 0 ? (
+        {tabSelected === 0 ? (
           <CardAbout pokemonDetail={pokemonDetail} />
-        ) : cardSelected === 1 ? (
+        ) : tabSelected === 1 ? (
           <CardStats pokemonDetail={pokemonDetail} />
         ) : (
           <CardEvolution />
@@ -104,23 +81,6 @@ const style = StyleSheet.create({
     width: 25,
     height: 25,
     zIndex: 2,
-  },
-  buttonSection: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-  },
-  buttonSelected: {
-    color: Colors.white,
-    fontSize: 16,
-    fontWeight: '700',
-    fontStyle: 'normal',
-  },
-  buttonUnselected: {
-    color: Colors.white,
-    fontSize: 16,
-    fontWeight: '400',
-    fontStyle: 'normal',
-    opacity: 0.5,
   },
   cardsContainer: {
     flex: 1,

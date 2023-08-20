@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   },
   patternDetailContainer: {
     position: 'absolute',
-    marginTop: 90,
+    marginTop: 85,
     right: -40,
     zIndex: 1,
   },
