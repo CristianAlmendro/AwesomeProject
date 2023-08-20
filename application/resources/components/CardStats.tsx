@@ -35,7 +35,7 @@ export default function CardStats({pokemonDetail}: PokemonDetailProps) {
   const name = uppercaseFirstLetter(pokemonDetail.name);
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <Text style={dynamicStyles.sectionTitle}>Base Stats</Text>
       {pokemonDetail?.info[0].stats.map(item => (
         <View style={styles.baseStats}>
@@ -96,6 +96,7 @@ const styles = StyleSheet.create({
   container: {
     height: 400,
     display: 'flex',
+    marginHorizontal: 40,
   },
   baseStats: {
     flexDirection: 'row',

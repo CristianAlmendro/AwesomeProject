@@ -13,3 +13,8 @@ export interface NavigationProp {
 export interface PokemonDetailProps {
   pokemonDetail?: PokemonDetailData;
 }
+
+export interface RenderItemProps {
+  index: number;
+  name: string;
+}

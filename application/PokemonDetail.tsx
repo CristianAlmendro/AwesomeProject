@@ -13,7 +13,6 @@ import DetailHeader from './resources/components/DetailHeader';
 import {getDynamicStyles} from './resources/dynamicStyles';
 import BackIcon from './resources/icons/BackIcon';
 import {GET_POKEMON_DETAIL} from './services/GraphQLQuery';
-import {uppercaseFirstLetter} from './resources/Utilities';
 
 const PokemonDetail = ({navigation}: NavigationProp) => {
   const route = useRoute();
@@ -40,7 +39,6 @@ const PokemonDetail = ({navigation}: NavigationProp) => {
   const handleCardSelection = (cardId: number) => {
     setCardSelected(cardId);
   };
-  const pokemonName = uppercaseFirstLetter(pokemonDetail?.name ?? '');
 
   return (
     <View style={dynamicStyles.detailMainView}>
