@@ -10,11 +10,15 @@ import {
 import Colors from '../colors';
 import CircleBackground from '../icons/Circle';
 import PatternDetail from '../icons/PatternDetail';
+import {getDynamicStyles} from '../dynamicStyles';
 
 export default function DetailHeader({pokemonDetail}: PokemonDetailProps) {
   const pokemonId = intPadZeros(pokemonDetail?.info[0].id ?? 0);
-  const pokemonName = uppercaseFirstLetter(pokemonDetail?.name ?? '');
   const imageUrl = getPokemonArtWork(pokemonDetail?.info[0].id ?? 0);
+  const pokemonName = uppercaseFirstLetter(pokemonDetail?.name ?? '');
+  const dynamicStyles = getDynamicStyles(
+    pokemonDetail?.info[0].pokemonTypes[0].type.name ?? '',
+  );
   return (
     <View style={styles.container}>
       <View style={styles.headerInfoContainer}>
@@ -81,6 +85,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: Colors.white,
   },
+
   badgeContainer: {
     display: 'flex',
     flexDirection: 'row',

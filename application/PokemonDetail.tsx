@@ -13,6 +13,7 @@ import DetailHeader from './resources/components/DetailHeader';
 import {getDynamicStyles} from './resources/dynamicStyles';
 import BackIcon from './resources/icons/BackIcon';
 import {GET_POKEMON_DETAIL} from './services/GraphQLQuery';
+import {uppercaseFirstLetter} from './resources/Utilities';
 
 const PokemonDetail = ({navigation}: NavigationProp) => {
   const route = useRoute();
@@ -39,87 +40,76 @@ const PokemonDetail = ({navigation}: NavigationProp) => {
   const handleCardSelection = (cardId: number) => {
     setCardSelected(cardId);
   };
+  const pokemonName = uppercaseFirstLetter(pokemonDetail?.name ?? '');
 
   return (
-    <SafeAreaView style={style.container}>
-      <View style={dynamicStyles.background}>
+    <View style={dynamicStyles.detailMainView}>
+      <SafeAreaView style={style.safeArea}>
         <View style={style.headerContainer}>
           <TouchableOpacity style={style.backButton} onPress={goBackToList}>
             <BackIcon color={Colors.white} />
           </TouchableOpacity>
-          {loading ? (
-            <Text>Loading data...</Text>
-          ) : (
-            <DetailHeader pokemonDetail={pokemonDetail} />
-          )}
+          <DetailHeader pokemonDetail={pokemonDetail} />
         </View>
-        {/* BUTTONS */}
-        <View style={style.buttonSection}>
-          <TouchableOpacity onPress={() => handleCardSelection(0)}>
-            <Text
-              style={
-                cardSelected === 0
-                  ? style.buttonSelected
-                  : style.buttonUnselected
-              }>
-              About
-            </Text>
-          </TouchableOpacity>
+      </SafeAreaView>
 
-          <TouchableOpacity onPress={() => handleCardSelection(1)}>
-            <Text
-              style={
-                cardSelected === 1
-                  ? style.buttonSelected
-                  : style.buttonUnselected
-              }>
-              Stats
-            </Text>
-          </TouchableOpacity>
+      {/* BUTTONS */}
+      <View style={style.buttonSection}>
+        <TouchableOpacity onPress={() => handleCardSelection(0)}>
+          <Text
+            style={
+              cardSelected === 0 ? style.buttonSelected : style.buttonUnselected
+            }>
+            About
+          </Text>
+        </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => handleCardSelection(2)}>
-            <Text
-              style={
-                cardSelected === 2
-                  ? style.buttonSelected
-                  : style.buttonUnselected
-              }>
-              Evolution
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <View style={style.card}>
-          {cardSelected === 0 ? (
-            <CardAbout pokemonDetail={pokemonDetail} />
-          ) : cardSelected === 1 ? (
-            <CardStats pokemonDetail={pokemonDetail} />
-          ) : (
-            <CardEvolution />
-          )}
-        </View>
+        <TouchableOpacity onPress={() => handleCardSelection(1)}>
+          <Text
+            style={
+              cardSelected === 1 ? style.buttonSelected : style.buttonUnselected
+            }>
+            Stats
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => handleCardSelection(2)}>
+          <Text
+            style={
+              cardSelected === 2 ? style.buttonSelected : style.buttonUnselected
+            }>
+            Evolution
+          </Text>
+        </TouchableOpacity>
       </View>
-    </SafeAreaView>
+      <View style={style.cardsContainer}>
+        {cardSelected === 0 ? (
+          <CardAbout pokemonDetail={pokemonDetail} />
+        ) : cardSelected === 1 ? (
+          <CardStats pokemonDetail={pokemonDetail} />
+        ) : (
+          <CardEvolution />
+        )}
+      </View>
+    </View>
   );
 };
 
 const style = StyleSheet.create({
-  container: {
-    display: 'flex',
-    flex: 1,
-  },
   headerContainer: {
-    marginHorizontal: 40,
+    margin: 40,
+  },
+  safeArea: {
+    height: 265,
   },
   backButton: {
-    marginTop: 40,
     width: 25,
     height: 25,
+    zIndex: 2,
   },
   buttonSection: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginBottom: 15,
-    marginTop: 61,
   },
   buttonSelected: {
     color: Colors.white,
@@ -134,11 +124,11 @@ const style = StyleSheet.create({
     fontStyle: 'normal',
     opacity: 0.5,
   },
-  card: {
+  cardsContainer: {
+    flex: 1,
     backgroundColor: Colors.white,
-    padding: 40,
-    borderTopLeftRadius: 38,
-    borderTopRightRadius: 38,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
   },
 });
 

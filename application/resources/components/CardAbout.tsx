@@ -35,7 +35,7 @@ export default function CardAbout({pokemonDetail}: PokemonDetailProps) {
   );
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <Text style={styles.dataResult}>
         {
           pokemonDetail?.evolutionChain.species[0].speciesFlavorTexts[0]
@@ -152,8 +152,10 @@ export default function CardAbout({pokemonDetail}: PokemonDetailProps) {
 const styles = StyleSheet.create({
   container: {
     display: 'flex',
-    height: 400,
     flexDirection: 'column',
+    marginHorizontal: 40,
+    marginTop: 40,
+    marginBottom: 50,
   },
   pokemonData: {
     flexDirection: 'row',
@@ -172,6 +174,8 @@ const styles = StyleSheet.create({
     fontStyle: 'normal',
     fontWeight: '400',
     color: Colors.textGray,
+    flex: 1,
+    flexWrap: 'wrap',
   },
   abilities: {
     flexDirection: 'column',

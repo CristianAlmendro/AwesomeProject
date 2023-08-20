@@ -83,5 +83,22 @@ export const getDynamicStyles = (textColor: string) => {
       alignItems: 'center',
       padding: 5,
     },
+    pokemonNameShadow: {
+      fontSize: 100,
+      fontStyle: 'normal',
+      fontWeight: '700',
+      color: backgroundColor,
+      textShadowColor: Colors.textBlack,
+      textShadowOffset: {width: -1, height: 1},
+      textShadowRadius: 10,
+      position: 'absolute',
+      top: 25,
+      zIndex: 1,
+    },
+    detailMainView: {
+      display: 'flex',
+      flex: 1,
+      backgroundColor: backgroundColor,
+    },
   });
 };
