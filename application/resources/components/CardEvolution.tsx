@@ -9,6 +9,7 @@ import {
 import {getDynamicStyles} from '../dynamicStyles';
 import Colors from '../colors';
 import PokeballEvolution from '../icons/PokeballEvolution';
+import LevelUp from '../icons/LevelUp';
 
 export default function CardEvolution({pokemonDetail}: PokemonDetailProps) {
   const dynamicStyles = getDynamicStyles(
@@ -41,6 +42,16 @@ export default function CardEvolution({pokemonDetail}: PokemonDetailProps) {
                   {uppercaseFirstLetter(
                     pokemonDetail?.evolutionChain.species[index].name,
                   )}
+                </Text>
+              </View>
+              <View style={styles.levelUp}>
+                <LevelUp />
+                <Text style={styles.levelUpText}>
+                  Level{' '}
+                  {
+                    pokemonDetail?.evolutionChain.species[index + 1]
+                      .pokemon_v2_pokemonevolutions[0].min_level
+                  }
                 </Text>
               </View>
               <View style={styles.pokemon}>
@@ -88,7 +99,7 @@ const styles = StyleSheet.create({
     zIndex: 2,
     width: 75,
     height: 75,
-    marginTop: 15,
+    margin: 15,
   },
   imageContainer: {
     position: 'absolute',
@@ -102,6 +113,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: 30,
     marginRight: 5,
+    alignItems: 'center',
   },
   pokemon: {
     flexDirection: 'column',
@@ -116,6 +128,16 @@ const styles = StyleSheet.create({
   },
   pokemonName: {
     fontSize: 16,
+    fontStyle: 'normal',
+    fontWeight: '700',
+    color: Colors.textBlack,
+  },
+  levelUp: {
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  levelUpText: {
+    fontSize: 12,
     fontStyle: 'normal',
     fontWeight: '700',
     color: Colors.textBlack,
