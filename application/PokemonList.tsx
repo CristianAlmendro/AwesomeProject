@@ -18,7 +18,7 @@ import PokeballIcon from './resources/icons/PokeballIcon';
 import SortIcon from './resources/icons/SortIcon';
 import {GET_POKEMONS} from './services/GraphQLQuery';
 
-const limit = 10;
+const limit = 100;
 
 function PokemonList(): JSX.Element {
   const [pokemonList, setPokemonList] = useState<PokemonData[]>([]);

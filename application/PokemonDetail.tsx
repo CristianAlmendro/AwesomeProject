@@ -1,7 +1,7 @@
 import {useQuery} from '@apollo/client';
 import {useRoute} from '@react-navigation/native';
 import React, {useState} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {PokemonDetailData} from './models/PokemonDetailModel';
 import {NavigationProp} from './resources/Types';
@@ -10,10 +10,10 @@ import CardAbout from './resources/components/CardAbout';
 import CardEvolution from './resources/components/CardEvolution';
 import CardStats from './resources/components/CardStats';
 import DetailHeader from './resources/components/DetailHeader';
+import DetailTabs from './resources/components/DetailTabs';
 import {getDynamicStyles} from './resources/dynamicStyles';
 import BackIcon from './resources/icons/BackIcon';
 import {GET_POKEMON_DETAIL} from './services/GraphQLQuery';
-import DetailTabs from './resources/components/DetailTabs';
 
 const PokemonDetail = ({navigation}: NavigationProp) => {
   const route = useRoute();
