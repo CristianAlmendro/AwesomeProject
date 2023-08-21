@@ -141,5 +141,6 @@ const styles = StyleSheet.create({
     fontStyle: 'normal',
     fontWeight: '700',
     color: Colors.textBlack,
+    textAlign: 'center',
   },
 });

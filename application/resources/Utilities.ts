@@ -86,9 +86,10 @@ export function getStatName(statName: string) {
 export function getEvollutionName(pokemonEvolution: PokemonEvolution) {
   switch (pokemonEvolution.pokemon_v2_evolutiontrigger.name) {
     case 'level-up':
-      return `Level ${pokemonEvolution.min_level}`;
+      const level = pokemonEvolution.min_level ?? '??';
+      return `Level ${level}`;
     case 'use-item':
-      return `Item ${pokemonEvolution.pokemon_v2_item.name}`;
+      return `Item\n${pokemonEvolution.pokemon_v2_item.name}`;
     default:
       return '??????';
   }
