@@ -76,8 +76,8 @@ export default function CardStats({pokemonDetail}: PokemonDetailProps) {
           The effectiveness of each type on {name}
         </Text>
         <View style={styles.typeDefenses}>
-          {defenseData.map(item => (
-            <View style={styles.typeDefenseItem}>
+          {defenseData.map((item, index) => (
+            <View key={index} style={styles.typeDefenseItem}>
               <View style={getDynamicStyles(item.attackType).defenseType}>
                 {PokemonTypeSelector(item.attackType, 15, 15, Colors.white)}
               </View>

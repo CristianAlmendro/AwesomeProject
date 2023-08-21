@@ -101,7 +101,11 @@ export default function CardAbout({pokemonDetail}: PokemonDetailProps) {
           {pokemonDetail?.info[0].stats
             .filter(stat => stat.base_stat === 65)
             .map((item, index) => (
-              <RenderItem index={index} name={item.pokemon_v2_stat.name} />
+              <RenderItem
+                key={index}
+                index={index}
+                name={item.pokemon_v2_stat.name}
+              />
             ))}
         </View>
       </View>
@@ -153,8 +157,8 @@ export default function CardAbout({pokemonDetail}: PokemonDetailProps) {
         </Text>
       </View>
       <Text style={dynamicStyles.sectionTitle}>Location</Text>
-      {pokemonDetail.numbers.map(number => (
-        <View style={styles.pokemonData}>
+      {pokemonDetail.numbers.map((number, index) => (
+        <View key={index} style={styles.pokemonData}>
           <Text style={styles.dataTitle}>
             {convertToPaddedString(number.pokedex_number, 3)}
           </Text>

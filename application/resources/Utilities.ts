@@ -1,3 +1,5 @@
+import {PokemonEvolution} from '../models/PokemonDetailModel';
+
 export const intPadZeros = (id: number) => {
   const paddedNumber = String(id).padStart(3, '0');
   return `#${paddedNumber}`;
@@ -78,6 +80,17 @@ export function getStatName(statName: string) {
       return 'Speed';
     default:
       return '';
+  }
+}
+
+export function getEvollutionName(pokemonEvolution: PokemonEvolution) {
+  switch (pokemonEvolution.pokemon_v2_evolutiontrigger.name) {
+    case 'level-up':
+      return `Level ${pokemonEvolution.min_level}`;
+    case 'use-item':
+      return `Item ${pokemonEvolution.pokemon_v2_item.name}`;
+    default:
+      return '??????';
   }
 }
 

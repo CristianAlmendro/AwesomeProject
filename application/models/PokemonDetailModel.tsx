@@ -61,7 +61,7 @@ interface EvolutionItem {
   name: string;
 }
 
-interface PokemonEvolution {
+export interface PokemonEvolution {
   min_level: number;
   pokemon_v2_evolutiontrigger: EvolutionTrigger;
   pokemon_v2_item: EvolutionItem;

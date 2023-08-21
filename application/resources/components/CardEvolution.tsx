@@ -2,6 +2,7 @@ import React from 'react';
 import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {PokemonDetailProps} from '../Types';
 import {
+  getEvollutionName,
   getPokemonArtWork,
   intPadZeros,
   uppercaseFirstLetter,
@@ -47,11 +48,10 @@ export default function CardEvolution({pokemonDetail}: PokemonDetailProps) {
               <View style={styles.levelUp}>
                 <LevelUp />
                 <Text style={styles.levelUpText}>
-                  Level{' '}
-                  {
+                  {getEvollutionName(
                     pokemonDetail?.evolutionChain.species[index + 1]
-                      .pokemon_v2_pokemonevolutions[0].min_level
-                  }
+                      .pokemon_v2_pokemonevolutions[0],
+                  )}
                 </Text>
               </View>
               <View style={styles.pokemon}>
