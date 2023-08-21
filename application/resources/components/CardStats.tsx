@@ -82,7 +82,13 @@ export default function CardStats({pokemonDetail}: PokemonDetailProps) {
                 {PokemonTypeSelector(item.attackType, 15, 15, Colors.white)}
               </View>
               <Text style={styles.typeDefenseMultiplier}>
-                {item.defenseMultiplier}
+                {item.defenseMultiplier === 1
+                  ? ''
+                  : item.defenseMultiplier === 0.25
+                  ? '¼'
+                  : item.defenseMultiplier === 0.5
+                  ? '½'
+                  : '2'}
               </Text>
             </View>
           ))}
@@ -94,9 +100,10 @@ export default function CardStats({pokemonDetail}: PokemonDetailProps) {
 
 const styles = StyleSheet.create({
   container: {
-    height: 400,
     display: 'flex',
     marginHorizontal: 40,
+    marginTop: 30,
+    marginBottom: 50,
   },
   baseStats: {
     flexDirection: 'row',
@@ -131,11 +138,11 @@ const styles = StyleSheet.create({
     width: 120,
   },
   statDescription: {
-    marginTop: 5,
     fontSize: 12,
     fontStyle: 'normal',
     fontWeight: '500',
     color: Colors.textGray,
+    marginBottom: 20,
   },
   typeDefenses: {
     flexWrap: 'wrap',

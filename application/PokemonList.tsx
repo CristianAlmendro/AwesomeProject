@@ -98,7 +98,7 @@ function PokemonList(): JSX.Element {
             ItemSeparatorComponent={separator}
             showsVerticalScrollIndicator={false}
             onEndReached={handleLoadMore}
-            onEndReachedThreshold={0.1}
+            onEndReachedThreshold={0.3}
           />
         )}
       </View>

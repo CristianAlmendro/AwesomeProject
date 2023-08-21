@@ -71,7 +71,7 @@ interface PokemonEvolution {
   time_of_day: string;
 }
 
-interface PokemonSpecies {
+export interface PokemonSpecies {
   id: number;
   name: string;
   order: number;

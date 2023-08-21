@@ -69,7 +69,7 @@ export const getDynamicStyles = (textColor: string) => {
       fontSize: 16,
       fontWeight: '700',
       fontStyle: 'normal',
-      marginTop: 30,
+      marginTop: 5,
       marginBottom: 20,
     },
     typeColor: {

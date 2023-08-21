@@ -63,7 +63,7 @@ const PokemonDetail = ({navigation}: NavigationProp) => {
         ) : tabSelected === 1 ? (
           <CardStats pokemonDetail={pokemonDetail} />
         ) : (
-          <CardEvolution />
+          <CardEvolution pokemonDetail={pokemonDetail} />
         )}
       </View>
     </View>
