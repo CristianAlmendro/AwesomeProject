@@ -19,6 +19,7 @@ import SortIcon from './resources/icons/SortIcon';
 import {GET_POKEMONS} from './services/GraphQLQuery';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {BottomSheetModal, BottomSheetModalProvider} from '@gorhom/bottom-sheet';
+import Filters from './resources/components/Filters';
 
 const limit = 100;
 
@@ -63,7 +64,7 @@ function PokemonList(): JSX.Element {
 
   const bottomSheetRef = useRef<BottomSheetModal>(null);
 
-  const snapPoints = useMemo(() => ['25%', '50%'], []);
+  const snapPoints = useMemo(() => ['50%', '90%'], []);
 
   function changeBottomSheetRef() {
     bottomSheetRef.current?.present();
@@ -122,7 +123,7 @@ function PokemonList(): JSX.Element {
           index={0}
           snapPoints={snapPoints}>
           <View style={style.contentContainer}>
-            <Text>Awesome 🎉</Text>
+            <Filters />
           </View>
         </BottomSheetModal>
       </BottomSheetModalProvider>
