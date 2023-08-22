@@ -32,8 +32,8 @@ export default function DetailHeader({pokemonDetail}: PokemonDetailProps) {
           <Text style={styles.pokemonId}>{pokemonId}</Text>
           <Text style={styles.pokemonName}>{pokemonName}</Text>
           <View style={styles.badgeContainer}>
-            {pokemonDetail?.info[0].pokemonTypes.map(item => (
-              <PokemonBadge item={item.type.name} />
+            {pokemonDetail?.info[0].pokemonTypes.map((item, index) => (
+              <PokemonBadge key={index} item={item.type.name} />
             ))}
           </View>
         </View>

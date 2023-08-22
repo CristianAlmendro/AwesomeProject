@@ -1,5 +1,12 @@
 import React from 'react';
-import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {PokemonDetailProps} from '../Types';
 import {
   getEvollutionName,
@@ -11,11 +18,17 @@ import {getDynamicStyles} from '../dynamicStyles';
 import Colors from '../colors';
 import PokeballEvolution from '../icons/PokeballEvolution';
 import LevelUp from '../icons/LevelUp';
+import {useNavigation} from '@react-navigation/native';
 
 export default function CardEvolution({pokemonDetail}: PokemonDetailProps) {
+  const navigation = useNavigation();
   const dynamicStyles = getDynamicStyles(
     pokemonDetail?.info[0].pokemonTypes[0].type.name ?? '',
   );
+
+  function goToDifferentParent(newParentId: number) {
+    navigation.navigate('PokemonDetail', {pokemonId: newParentId});
+  }
 
   return (
     <ScrollView style={styles.container}>
@@ -28,14 +41,21 @@ export default function CardEvolution({pokemonDetail}: PokemonDetailProps) {
                 <View style={styles.imageContainer}>
                   <PokeballEvolution />
                 </View>
-                <Image
-                  style={styles.pokemonImage}
-                  source={{
-                    uri: getPokemonArtWork(
+                <TouchableOpacity
+                  onPress={() =>
+                    goToDifferentParent(
                       pokemonDetail?.evolutionChain.species[index].id,
-                    ),
-                  }}
-                />
+                    )
+                  }>
+                  <Image
+                    style={styles.pokemonImage}
+                    source={{
+                      uri: getPokemonArtWork(
+                        pokemonDetail?.evolutionChain.species[index].id,
+                      ),
+                    }}
+                  />
+                </TouchableOpacity>
                 <Text style={styles.pokemonId}>
                   {intPadZeros(pokemonDetail?.evolutionChain.species[index].id)}
                 </Text>
@@ -58,14 +78,21 @@ export default function CardEvolution({pokemonDetail}: PokemonDetailProps) {
                 <View style={styles.imageContainer}>
                   <PokeballEvolution />
                 </View>
-                <Image
-                  style={styles.pokemonImage}
-                  source={{
-                    uri: getPokemonArtWork(
-                      pokemonDetail?.evolutionChain.species[index + 1].id,
-                    ),
-                  }}
-                />
+                <TouchableOpacity
+                  onPress={() =>
+                    goToDifferentParent(
+                      pokemonDetail?.evolutionChain.species[index + 1].id ?? 0,
+                    )
+                  }>
+                  <Image
+                    style={styles.pokemonImage}
+                    source={{
+                      uri: getPokemonArtWork(
+                        pokemonDetail?.evolutionChain.species[index + 1].id,
+                      ),
+                    }}
+                  />
+                </TouchableOpacity>
                 <Text style={styles.pokemonId}>
                   {intPadZeros(
                     pokemonDetail?.evolutionChain.species[index + 1].id,
@@ -79,7 +106,7 @@ export default function CardEvolution({pokemonDetail}: PokemonDetailProps) {
               </View>
             </View>
           ) : (
-            <></>
+            <View key={index} />
           ),
         )}
       </View>

@@ -37,8 +37,8 @@ export default function CardStats({pokemonDetail}: PokemonDetailProps) {
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <Text style={dynamicStyles.sectionTitle}>Base Stats</Text>
-      {pokemonDetail?.info[0].stats.map(item => (
-        <View style={styles.baseStats}>
+      {pokemonDetail?.info[0].stats.map((item, index) => (
+        <View key={index} style={styles.baseStats}>
           <Text style={styles.statsTitle}>
             {getStatName(item.pokemon_v2_stat.name)}
           </Text>

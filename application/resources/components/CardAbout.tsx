@@ -75,7 +75,11 @@ export default function CardAbout({pokemonDetail}: PokemonDetailProps) {
         <Text style={styles.dataTitle}>Abilities</Text>
         <View style={styles.abilities}>
           {pokemonDetail?.info[0].abilities.map((item, index) => (
-            <RenderItem index={index} name={item.pokemon_v2_ability.name} />
+            <RenderItem
+              key={index}
+              index={index}
+              name={item.pokemon_v2_ability.name}
+            />
           ))}
         </View>
       </View>
@@ -83,8 +87,8 @@ export default function CardAbout({pokemonDetail}: PokemonDetailProps) {
       <View style={styles.pokemonData}>
         <Text style={styles.dataTitle}>Weaknesses</Text>
         <View style={styles.typeDefenses}>
-          {defenseData.map(item => (
-            <View style={styles.typeDefenseItem}>
+          {defenseData.map((item, index) => (
+            <View key={index} style={styles.typeDefenseItem}>
               <View style={getDynamicStyles(item.attackType).defenseType}>
                 {PokemonTypeSelector(item.attackType, 15, 15, Colors.white)}
               </View>
@@ -145,7 +149,11 @@ export default function CardAbout({pokemonDetail}: PokemonDetailProps) {
         <Text style={styles.dataTitle}>Egg Groups</Text>
         <View style={styles.abilities}>
           {pokemonDetail?.eggGroups.map((item, index) => (
-            <RenderItem index={index} name={item.pokemon_v2_egggroup.name} />
+            <RenderItem
+              key={index}
+              index={index}
+              name={item.pokemon_v2_egggroup.name}
+            />
           ))}
         </View>
       </View>
