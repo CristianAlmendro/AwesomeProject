@@ -27,7 +27,8 @@ export default function CardEvolution({pokemonDetail}: PokemonDetailProps) {
   );
 
   function goToDifferentParent(newParentId: number) {
-    navigation.navigate('PokemonDetail', {pokemonId: newParentId});
+    console.log(newParentId);
+    navigation.push('PokemonDetail', {pokemonId: newParentId});
   }
 
   return (
