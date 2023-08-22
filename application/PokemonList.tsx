@@ -1,5 +1,5 @@
 import {useQuery} from '@apollo/client';
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {
   FlatList,
   SafeAreaView,
@@ -17,6 +17,8 @@ import GenerationIcon from './resources/icons/GenerationIcon';
 import PokeballIcon from './resources/icons/PokeballIcon';
 import SortIcon from './resources/icons/SortIcon';
 import {GET_POKEMONS} from './services/GraphQLQuery';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import {BottomSheetModal, BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 
 const limit = 100;
 
@@ -59,50 +61,72 @@ function PokemonList(): JSX.Element {
     return <View style={style.separator} />;
   };
 
+  const bottomSheetRef = useRef<BottomSheetModal>(null);
+
+  const snapPoints = useMemo(() => ['25%', '50%'], []);
+
+  function changeBottomSheetRef() {
+    bottomSheetRef.current?.present();
+  }
+
   return (
-    <SafeAreaView style={style.safeAreaContainer}>
-      <View style={style.pokeballContainer}>
-        <PokeballIcon />
-      </View>
-      <View style={style.container}>
-        <View style={style.icons}>
-          <TouchableOpacity style={style.icon}>
-            <GenerationIcon color={Colors.black} width={25} height={25} />
-          </TouchableOpacity>
-          <TouchableOpacity style={style.icon}>
-            <SortIcon color={Colors.black} width={25} height={25} />
-          </TouchableOpacity>
-          <TouchableOpacity style={style.icon}>
-            <FilterIcon color={Colors.black} width={25} height={25} />
-          </TouchableOpacity>
-        </View>
-        <Text style={style.title}>Pokédex</Text>
-        <Text style={style.subtitle}>
-          Search for Pokémon by name or using the National Pokédex number.
-        </Text>
-        <CustomTextInput
-          placeholder="What Pokémon are you looking for?"
-          value={search}
-          onChangeText={handleSearch}
-        />
-        {loading && pokemonList.length === 0 ? (
-          <Text>Loading...</Text>
-        ) : error ? (
-          <Text>Error: {error.message}</Text>
-        ) : (
-          <FlatList
-            style={style.list}
-            data={search.length === 0 ? pokemonList : filteredPokemons}
-            renderItem={item => <PokemonItem pokemon={item.item} />}
-            keyExtractor={(item: PokemonData) => item.id.toString()}
-            ItemSeparatorComponent={separator}
-            showsVerticalScrollIndicator={false}
-            onEndReached={handleLoadMore}
-            onEndReachedThreshold={0.3}
-          />
-        )}
-      </View>
-    </SafeAreaView>
+    <GestureHandlerRootView style={{flex: 1}}>
+      <BottomSheetModalProvider>
+        <SafeAreaView style={style.safeAreaContainer}>
+          <View style={style.pokeballContainer}>
+            <PokeballIcon />
+          </View>
+          <View style={style.container}>
+            <View style={style.icons}>
+              <TouchableOpacity
+                onPress={changeBottomSheetRef}
+                style={style.icon}>
+                <GenerationIcon color={Colors.black} width={25} height={25} />
+              </TouchableOpacity>
+              <TouchableOpacity style={style.icon}>
+                <SortIcon color={Colors.black} width={25} height={25} />
+              </TouchableOpacity>
+              <TouchableOpacity style={style.icon}>
+                <FilterIcon color={Colors.black} width={25} height={25} />
+              </TouchableOpacity>
+            </View>
+            <Text style={style.title}>Pokédex</Text>
+            <Text style={style.subtitle}>
+              Search for Pokémon by name or using the National Pokédex number.
+            </Text>
+            <CustomTextInput
+              placeholder="What Pokémon are you looking for?"
+              value={search}
+              onChangeText={handleSearch}
+            />
+            {loading && pokemonList.length === 0 ? (
+              <Text>Loading...</Text>
+            ) : error ? (
+              <Text>Error: {error.message}</Text>
+            ) : (
+              <FlatList
+                style={style.list}
+                data={search.length === 0 ? pokemonList : filteredPokemons}
+                renderItem={item => <PokemonItem pokemon={item.item} />}
+                keyExtractor={(item: PokemonData) => item.id.toString()}
+                ItemSeparatorComponent={separator}
+                showsVerticalScrollIndicator={false}
+                onEndReached={handleLoadMore}
+                onEndReachedThreshold={0.3}
+              />
+            )}
+          </View>
+        </SafeAreaView>
+        <BottomSheetModal
+          ref={bottomSheetRef}
+          index={0}
+          snapPoints={snapPoints}>
+          <View style={style.contentContainer}>
+            <Text>Awesome 🎉</Text>
+          </View>
+        </BottomSheetModal>
+      </BottomSheetModalProvider>
+    </GestureHandlerRootView>
   );
 }
 
@@ -151,6 +175,11 @@ const style = StyleSheet.create({
   separator: {
     height: 5,
     backgroundColor: Colors.background,
+  },
+  contentContainer: {
+    flex: 1,
+    borderTopRightRadius: 30,
+    borderTopLeftRadius: 30,
   },
 });
 
