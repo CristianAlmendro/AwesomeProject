@@ -1,18 +1,24 @@
 import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
+import {uppercaseFirstLetter} from '../Utilities';
 import Colors from '../colors';
 import {getDynamicStyles} from '../dynamicStyles';
+import PokemonTypeSelector from './PokemonTypeSelector';
 
-function PokemonBadge({item}) {
-  const dynamicStyles = getDynamicStyles(item.name);
+interface PokemonBadgeProps {
+  item: string;
+}
+
+function PokemonBadge({item}: PokemonBadgeProps) {
+  const dynamicStyles = getDynamicStyles(item);
+  const pokemonType = PokemonTypeSelector(item, 15, 15, Colors.white);
+  const typeName = uppercaseFirstLetter(item);
+
   return (
     <View style={dynamicStyles.type}>
       <View style={style.container}>
-        <Image
-          style={style.bargeImage}
-          source={require('../icons/Filter.png')}
-        />
-        <Text style={style.bargeText}> {item.name}</Text>
+        {pokemonType}
+        <Text style={style.bargeText}>{typeName}</Text>
       </View>
     </View>
   );

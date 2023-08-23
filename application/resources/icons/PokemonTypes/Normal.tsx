@@ -2,13 +2,13 @@ import * as React from 'react';
 import Svg, {G, Path, Defs, ClipPath} from 'react-native-svg';
 import {IconProps} from '../../Types';
 
-const Dark = ({color, width, height, ...props}: IconProps) => (
+const Normal = ({color, width, height, ...props}: IconProps) => (
   <Svg width={width} height={height} viewBox="0 0 25 25" fill="none" {...props}>
     <G clipPath="url(#a)">
       <Path
         fill={color}
         fillRule="evenodd"
-        d="M11.217 22.112a9.549 9.549 0 0 0 11.005-9.438 9.549 9.549 0 0 0-10.595-9.492c2.616 1.982 4.345 5.415 4.345 9.318 0 4.104-1.912 7.688-4.755 9.612ZM12.5 25C19.404 25 25 19.404 25 12.5S19.404 0 12.5 0 0 5.596 0 12.5 5.596 25 12.5 25Z"
+        d="M25 12.5C25 19.404 19.404 25 12.5 25S0 19.404 0 12.5 5.596 0 12.5 0 25 5.596 25 12.5Zm-5.357 0a7.143 7.143 0 1 1-14.286 0 7.143 7.143 0 0 1 14.286 0Z"
         clipRule="evenodd"
       />
     </G>
@@ -19,4 +19,4 @@ const Dark = ({color, width, height, ...props}: IconProps) => (
     </Defs>
   </Svg>
 );
-export default Dark;
+export default Normal;

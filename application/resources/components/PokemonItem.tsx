@@ -1,85 +1,99 @@
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
-import {FlatList, Image, StyleSheet, Text, View} from 'react-native';
+import {
+  FlatList,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {PokemonData} from '../../models/Pokemon';
+import {
+  getPokemonArtWork,
+  intPadZeros,
+  uppercaseFirstLetter,
+} from '../Utilities';
 import Colors from '../colors';
-import PokemonBadge from './PokemonBadge';
 import {getDynamicStyles} from '../dynamicStyles';
+import Pattern from '../icons/Pattern';
+import Pokeball from '../icons/Pokeball';
+import PokemonBadge from './PokemonBadge';
 
-function PokemonItem({pokemon}) {
-  const dynamicStyles = getDynamicStyles(pokemon.types[0].pokemon_v2_type.name);
+interface PokemonItemProps {
+  pokemon: PokemonData;
+}
 
-  const intToHexColor = (number: any) => {
-    const paddedNumber = String(number).padStart(3, '0');
-    return `#${paddedNumber}`;
-  };
-
-  const getImage = (number: any) => {
-    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${number}.png`;
-  };
+function PokemonItem({pokemon}: PokemonItemProps) {
+  const navigation = useNavigation();
+  const dynamicStyles = getDynamicStyles(pokemon.pokemonTypes[0].type.name);
+  const pokemonName = uppercaseFirstLetter(pokemon.name);
 
   return (
-    <View style={style.container}>
-      <View style={style.emptyTop} />
-      <View style={dynamicStyles.background}>
-        <View style={style.pokemonContent}>
-          <View style={style.cardArea}>
-            <Text style={style.pokemonId}> {intToHexColor(pokemon.id)}</Text>
-            <Text style={style.pokemonName}>
-              {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
-            </Text>
-            <FlatList
-              style={style.pokemonBadge}
-              data={pokemon.types}
-              renderItem={({item}) => (
-                <PokemonBadge item={item.pokemon_v2_type} />
-              )}
-              keyExtractor={item => item.pokemon_v2_type.id.toString()}
-            />
-          </View>
-          <View style={style.imageArea}>
-            <Image
-              style={style.pokemonImage}
-              source={{
-                uri: getImage(pokemon.id),
-              }}
-            />
+    <TouchableOpacity
+      onPress={() =>
+        navigation.navigate('PokemonDetail', {pokemonId: pokemon.id})
+      }>
+      <View style={style.container}>
+        <View style={style.emptyTop} />
+        <View style={dynamicStyles.background}>
+          <View style={style.pokemonContent}>
+            <View style={style.pokemonInfoContainer}>
+              <Text style={style.pokemonId}> {intPadZeros(pokemon.id)}</Text>
+              <Text style={style.pokemonName}>{pokemonName}</Text>
+              <FlatList
+                style={style.pokemonBadge}
+                data={pokemon.pokemonTypes}
+                renderItem={({item}) => <PokemonBadge item={item.type.name} />}
+                keyExtractor={item => String(item.type.id)}
+              />
+            </View>
+            <View style={style.pokemonImageContainer}>
+              <Image
+                style={style.pokemonImage}
+                source={{
+                  uri: getPokemonArtWork(pokemon.id),
+                }}
+              />
+            </View>
+            <View style={style.pokeballContainer}>
+              <Pokeball />
+            </View>
           </View>
         </View>
       </View>
-    </View>
+      <View style={style.patternContainer}>
+        <Pattern width={74} height={32} />
+      </View>
+    </TouchableOpacity>
   );
 }
 
 const style = StyleSheet.create({
   container: {
     display: 'flex',
-    flex: 1,
   },
   emptyTop: {
     height: 25,
   },
-  cardArea: {
-    width: '60%',
-    height: 115,
-    padding: 20,
-    flexDirection: 'column',
-  },
-  imageArea: {
-    width: '40%',
-    paddingRight: 10,
+  pokemonInfoContainer: {
+    marginLeft: 20,
+    marginTop: 20,
   },
   pokemonId: {
     fontSize: 12,
-    fontWeight: '700',
     fontStyle: 'normal',
-    color: Colors.textNumber,
+    fontWeight: '700',
+    color: Colors.textPokemonId,
   },
   pokemonName: {
     fontSize: 26,
-    fontWeight: '700',
     fontStyle: 'normal',
+    fontWeight: '700',
     color: Colors.white,
   },
   pokemonBadge: {
+    marginTop: 5,
     flexDirection: 'row',
   },
   pokemonImage: {
@@ -87,7 +101,25 @@ const style = StyleSheet.create({
     height: 130,
   },
   pokemonContent: {
+    flex: 1,
     flexDirection: 'row',
+    justifyContent: 'space-between',
+    height: 115,
+  },
+  patternContainer: {
+    position: 'absolute',
+    left: 90,
+    top: 30,
+  },
+  pokemonImageContainer: {
+    zIndex: 2,
+    right: 10,
+    top: -25,
+  },
+  pokeballContainer: {
+    zIndex: 1,
+    position: 'absolute',
+    right: 0,
   },
 });
 

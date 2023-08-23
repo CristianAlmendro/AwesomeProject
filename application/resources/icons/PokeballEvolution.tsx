@@ -2,47 +2,47 @@ import * as React from 'react';
 import Svg, {Path, Defs, LinearGradient, Stop} from 'react-native-svg';
 import {IconProps} from '../Types';
 
-const PokeballIcon = ({...props}: IconProps) => (
-  <Svg width={350} height={207} fill="none" {...props}>
+const PokeballEvolution = ({...props}: IconProps) => (
+  <Svg width={100} height={100} fill="none" {...props}>
     <Path
       fill="url(#a)"
-      d="M207-207c106.525 0 194.396 79.273 207 181.626H312.97c-11.504-47.501-54.584-82.8-105.97-82.8-51.386 0-94.466 35.299-105.97 82.8H0C12.604-127.727 100.475-207 207-207Z"
+      d="M50 0c25.73 0 46.956 19.148 50 43.871H75.597c-2.779-11.474-13.185-20-25.597-20s-22.818 8.526-25.597 20H0C3.044 19.148 24.27 0 50 0Z"
     />
     <Path
       fill="url(#b)"
-      d="M312.97 25.374H414C401.396 127.727 313.525 207 207 207S12.604 127.727 0 25.374h101.03c11.504 47.501 54.584 82.8 105.97 82.8 51.386 0 94.466-35.299 105.97-82.8Z"
+      d="M75.597 56.129H100C96.956 80.852 75.73 100 50 100S3.044 80.852 0 56.129h24.403c2.779 11.474 13.185 20 25.597 20s22.818-8.526 25.597-20Z"
     />
     <Path
       fill="url(#c)"
-      d="M207 68.11c37.898 0 68.62-30.494 68.62-68.11S244.898-68.11 207-68.11 138.38-37.616 138.38 0 169.102 68.11 207 68.11Z"
+      d="M50 66.452c9.154 0 16.575-7.366 16.575-16.452 0-9.086-7.42-16.452-16.575-16.452-9.154 0-16.575 7.366-16.575 16.452 0 9.086 7.42 16.452 16.575 16.452Z"
     />
     <Defs>
       <LinearGradient
         id="a"
-        x1={207}
-        x2={207}
-        y1={0}
-        y2={185.5}
+        x1={50}
+        x2={50}
+        y1={50}
+        y2={94.807}
         gradientUnits="userSpaceOnUse">
         <Stop stopColor="#F5F5F5" />
         <Stop offset={1} stopColor="#fff" />
       </LinearGradient>
       <LinearGradient
         id="b"
-        x1={207}
-        x2={207}
-        y1={0}
-        y2={185.5}
+        x1={50}
+        x2={50}
+        y1={50}
+        y2={94.807}
         gradientUnits="userSpaceOnUse">
         <Stop stopColor="#F5F5F5" />
         <Stop offset={1} stopColor="#fff" />
       </LinearGradient>
       <LinearGradient
         id="c"
-        x1={207}
-        x2={207}
-        y1={0}
-        y2={185.5}
+        x1={50}
+        x2={50}
+        y1={50}
+        y2={94.807}
         gradientUnits="userSpaceOnUse">
         <Stop stopColor="#F5F5F5" />
         <Stop offset={1} stopColor="#fff" />
@@ -50,4 +50,4 @@ const PokeballIcon = ({...props}: IconProps) => (
     </Defs>
   </Svg>
 );
-export default PokeballIcon;
+export default PokeballEvolution;

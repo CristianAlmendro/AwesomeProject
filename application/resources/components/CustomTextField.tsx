@@ -1,17 +1,28 @@
 import React from 'react';
-import {View, TextInput, StyleSheet, Image} from 'react-native';
-import Colors from '../colors.js';
+import {StyleSheet, TextInput, View} from 'react-native';
+import Colors from '../colors';
 
-const CustomTextInput = ({placeholder, imageSource, value, onChangeText}) => {
+interface CustomTextInputProps {
+  placeholder: string;
+  value: string;
+  onChangeText: (text: string) => void;
+}
+
+const CustomTextInput = ({
+  placeholder,
+  value,
+  onChangeText,
+}: CustomTextInputProps) => {
   return (
     <View style={styles.container}>
-      <Image style={styles.iconContainer} source={imageSource} />
       <TextInput
         style={styles.input}
         placeholder={placeholder}
         placeholderTextColor={Colors.textGray}
         value={value}
         onChangeText={onChangeText}
+        autoCapitalize="none"
+        autoCorrect={false}
       />
     </View>
   );

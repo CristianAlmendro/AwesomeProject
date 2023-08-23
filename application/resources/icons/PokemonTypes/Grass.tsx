@@ -2,13 +2,13 @@ import * as React from 'react';
 import Svg, {G, Path, Defs, ClipPath} from 'react-native-svg';
 import {IconProps} from '../../Types';
 
-const Dark = ({color, width, height, ...props}: IconProps) => (
+const Grass = ({color, width, height, ...props}: IconProps) => (
   <Svg width={width} height={height} viewBox="0 0 25 25" fill="none" {...props}>
     <G clipPath="url(#a)">
       <Path
         fill={color}
         fillRule="evenodd"
-        d="M11.217 22.112a9.549 9.549 0 0 0 11.005-9.438 9.549 9.549 0 0 0-10.595-9.492c2.616 1.982 4.345 5.415 4.345 9.318 0 4.104-1.912 7.688-4.755 9.612ZM12.5 25C19.404 25 25 19.404 25 12.5S19.404 0 12.5 0 0 5.596 0 12.5 5.596 25 12.5 25Z"
+        d="M4.65 21.808c-.09-.083-.178-.169-.265-.256-4.597-4.597-4.597-12.05 0-16.647C8.982.308 23.63 0 23.63 0s2 16.955-2.598 21.552c-4.082 4.083-10.418 4.54-15.005 1.37l3.696-4.535 5.908-1.276-4.823-.482 3.065-3.12 3.49-.765-2.76-.817 2.76-4.977-3.925 4.402-1.515-2.139.533 3.531-2.733 3.081-1.267-3.898v5.184l-3.807 4.697Z"
         clipRule="evenodd"
       />
     </G>
@@ -19,4 +19,4 @@ const Dark = ({color, width, height, ...props}: IconProps) => (
     </Defs>
   </Svg>
 );
-export default Dark;
+export default Grass;

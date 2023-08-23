@@ -1,8 +1,13 @@
-import React from 'react';
+import React, {ReactNode} from 'react';
 import {TouchableHighlight, StyleSheet} from 'react-native';
 import Colors from '../colors';
 
-const PrimaryButton = ({onPress, children}) => {
+interface PrimaryButtonProps {
+  onPress: () => void;
+  children: ReactNode;
+}
+
+const PrimaryButton = ({onPress, children}: PrimaryButtonProps) => {
   return (
     <TouchableHighlight style={styles.container} onPress={onPress}>
       {children}
@@ -17,7 +22,6 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     backgroundColor: Colors.primary,
     borderRadius: 10,
-    width: '80%',
   },
 });
 
