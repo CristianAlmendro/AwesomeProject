@@ -1,6 +1,6 @@
+import React, {useEffect, useMemo, useRef, useState} from 'react';
 import {useQuery} from '@apollo/client';
 import {BottomSheetModal, BottomSheetModalProvider} from '@gorhom/bottom-sheet';
-import React, {useEffect, useMemo, useRef, useState} from 'react';
 import {
   FlatList,
   SafeAreaView,
