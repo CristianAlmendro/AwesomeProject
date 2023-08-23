@@ -30,7 +30,7 @@ const PokemonDetail = ({navigation}: NavigationProp) => {
   }
 
   const goBackToList = () => {
-    navigation.popToTop();
+    navigation.pop();
   };
 
   const dynamicStyles = getDynamicStyles(

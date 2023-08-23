@@ -1,5 +1,6 @@
 import {useQuery} from '@apollo/client';
-import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import {BottomSheetModal, BottomSheetModalProvider} from '@gorhom/bottom-sheet';
+import React, {useEffect, useMemo, useRef, useState} from 'react';
 import {
   FlatList,
   SafeAreaView,
@@ -8,18 +9,17 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {PokemonData} from './models/Pokemon';
 import Colors from './resources/colors';
 import CustomTextInput from './resources/components/CustomTextField';
+import Filters from './resources/components/Filters';
 import PokemonItem from './resources/components/PokemonItem';
 import FilterIcon from './resources/icons/FilterIcon';
 import GenerationIcon from './resources/icons/GenerationIcon';
 import PokeballIcon from './resources/icons/PokeballIcon';
 import SortIcon from './resources/icons/SortIcon';
 import {GET_POKEMONS} from './services/GraphQLQuery';
-import {GestureHandlerRootView} from 'react-native-gesture-handler';
-import {BottomSheetModal, BottomSheetModalProvider} from '@gorhom/bottom-sheet';
-import Filters from './resources/components/Filters';
 
 const limit = 100;
 
